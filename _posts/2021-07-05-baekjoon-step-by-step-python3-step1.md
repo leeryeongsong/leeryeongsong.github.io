@@ -36,9 +36,9 @@ tags:
 <https://www.acmicpc.net/problem/2557>  
 
 소스 코드(Python 3)  
-***python
+```python
 print("Hello World!")
-***
+```
 
  출력 print() 함수를 이용하는 간단한 예제입니다.  
 대소문자, 문자 개수 등 정확하게 출력해야 정답을 맞출 수 있습니다.  
@@ -50,9 +50,9 @@ print("Hello World!")
 <https://www.acmicpc.net/problem/10718>   
 
 소스 코드(Python 3)  
-**python
+```python
 print("강한친구 대한육군\n강한친구 대한육군")
-***
+```
 
  예제 1단계 문제와 같이,  
 출력 print() 함수를 이용하는 간단한 예제입니다.  
