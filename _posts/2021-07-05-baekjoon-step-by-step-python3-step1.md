@@ -3,7 +3,7 @@ title:  "[1단계] 파이썬3으로 백준 단계별로 풀어보기- 입출력�
 excerpt: "1단계 2557번, 10718번, 10171번, 10172번, 1000번, 1001번"
 
 categories:
-  - 백준
+  - baekjoon
 tags:
   - 백준
   - Algorithm
