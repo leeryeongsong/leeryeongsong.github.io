@@ -1,7 +1,7 @@
 ---
-title: "백준"
+title: "Baekjoon"
 permalink: /categories/baekjoon/
 layout: category
 author_profile: true
-taxonomy: 백준
+taxonomy: baekjoon
 ---
