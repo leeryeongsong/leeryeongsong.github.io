@@ -1,5 +1,8 @@
 # [LeeRyeong's Blog](https://leeryeongsong.github.io)
 
+Hi, this is my blog. Thank you for your attention.
+
+© 2021 LeeRyeong Song,
 Powered by Jekyll & [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) v4.23.0 by mmistakes.
 
 
