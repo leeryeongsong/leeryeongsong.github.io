@@ -1,6 +1,6 @@
 ---
 title:  "[1단계] 파이썬3으로 백준 단계별로 풀어보기- 입출력과 사칙연산"
-excerpt: "1단계 2557번, 10718번, 10171번, 10172번, 1000번, 1001번"
+excerpt: "1단계 2557번, 10718번, 10171번, 10172번, 1000번, 1001번, 10998번, 1008번 "
 
 categories:
   - baekjoon
@@ -18,6 +18,7 @@ tags:
 백준의 저작권 안내에 따라   
 문제 본문은 링크로 제공하고,   
 소스 코드는 제가 작성한 소스 코드만을 사용합니다.  
+제 백준 아이디는 [leelee9797](https://www.acmicpc.net/user/leelee9797)입니다.
 <br>
 저는 Python 3 언어로 작성하고  
 외부 에디터로 Visual Studio Code를 사용합니다.  
@@ -25,17 +26,17 @@ tags:
 1단계 작성 기간 : 2021년 7월 5일 ~ 
 <br>
 <br>
-## 1단계, 입출력과 사칙연산
-<https://www.acmicpc.net/step/1>  
+# 1단계, 입출력과 사칙연산
+[백준 단계별로 풀어보기 1단계](https://www.acmicpc.net/step/1)  
 백준 사이트의 "단계별로 풀어보기" 문제 중 난이도 1단계 문제입니다.  
 1단계에는 예제가 11개 있습니다.  
 아래 소제목 이름은 (예제 n단계), (문제 번호), (문제 제목), (알고리즘 분류) 순서입니다.  
 <br>
 <br>
 <br>
-***
-### 예제 1단계, 2557번, "Hello World", 구현
-<https://www.acmicpc.net/problem/2557>  
+
+## 예제 1단계, 2557번, "Hello World", 구현
+[백준 2557번 문제](https://www.acmicpc.net/problem/2557)
 <br>
 소스 코드(Python 3)  
 ```python
@@ -48,9 +49,9 @@ print("Hello World!")
 <br>  
 <br>  
 <br>  
-***
-### 예제 2단계, 10718번, "We love kriii", 구현
-<https://www.acmicpc.net/problem/10718>   
+
+## 예제 2단계, 10718번, "We love kriii", 구현
+[백준 10718번 문제](https://www.acmicpc.net/problem/10718) 
 <br>
 소스 코드(Python 3)  
 ```python
@@ -64,9 +65,9 @@ print("강한친구 대한육군\n강한친구 대한육군")
 <br>
 <br>
 <br>
-***
-### 예제 3단계, 10171번, "고양이", 구현
-<https://www.acmicpc.net/problem/10171>
+
+## 예제 3단계, 10171번, "고양이", 구현
+[백준 10171번 문제](https://www.acmicpc.net/problem/10171)
 <br>
 #### 해결책 1
 소스 코드(Python 3)  
@@ -96,9 +97,9 @@ print("""\    /\\
 <br>
 <br>
 <br>
-***
-### 예제 4단계, 10172번, "개", 구현
-<https://www.acmicpc.net/problem/10172>
+
+## 예제 4단계, 10172번, "개", 구현
+[백준 10172번 문제](https://www.acmicpc.net/problem/10172)
 <br>
 #### 해결책 1
 소스 코드(Python 3)  
@@ -127,14 +128,14 @@ print('''|\_/|
 <br>
 <br>
 <br>
-***
-### 예제 5단계, 1000번, "A\+B", 수학, 구현, 사칙연산
-<https://www.acmicpc.net/problem/1000>
+
+## 예제 5단계, 1000번, "A\+B", 수학, 구현, 사칙연산
+[백준 1000번 문제](https://www.acmicpc.net/problem/1000)
 <br>
 #### 해결책 1
 소스 코드(Python 3)  
 ```python
-A, B =input().split()
+A, B = input().split()
 A = int(A)
 B = int(B)
 print(A+B)
@@ -153,7 +154,7 @@ input().split()으로 입력받은 값은 문자열이므로
 #### 해결책 2
 소스 코드(Python 3)  
 ```python
-A, B =map(int, input().split())
+A, B = map(int, input().split())
 print(A+B)
 ```
 <br>
@@ -162,14 +163,14 @@ map()으로 한 줄에 해결할 수 있다.
 <br>
 <br>
 <br>
-***
-### 예제 6단계, 1001번, "A\-B", 수학, 구현, 사칙연산
-<https://www.acmicpc.net/problem/1001>
+
+## 예제 6단계, 1001번, "A\-B", 수학, 구현, 사칙연산
+[백준 1001번 문제](https://www.acmicpc.net/problem/1001)
 <br>
 #### 해결책 1
 소스 코드(Python 3)  
 ```python
-A, B =input().split()
+A, B = input().split()
 A = int(A)
 B = int(B)
 print(A-B)
@@ -181,9 +182,62 @@ print(A-B)
 #### 해결책 2
 소스 코드(Python 3)  
 ```python
-A, B =map(int, input().split())
+A, B = map(int, input().split())
 print(A-B)
 ```
 <br>
 예제 5단계의 \+를 \-로 바꿔주면 된다.
+<br>
+<br>
+<br>
+
+### 예제 7단계, 10998번, "A×B", 수학, 구현, 사칙연산
+[백준 10998번 문제](https://www.acmicpc.net/problem/10998)
+<br>
+#### 해결책 1
+소스 코드(Python 3)  
+```python
+A, B = input().split()
+A = int(A)
+B = int(B)
+print(A*B)
+```
+<br>
+<br>
+#### 해결책 2
+소스 코드(Python 3)  
+```python
+A, B = map(int, input().split())
+print(A*B)
+```
+<br>
+<br>
+<br>
+
+### 예제 8단계, 1008번, "A/B", 수학, 구현, 사칙연산
+[백준 1008번 문제](https://www.acmicpc.net/problem/1008)
+<br>
+#### 해결책 1
+소스 코드(Python 3)  
+```python
+A, B = input().split()
+A = int(A)
+B = int(B)
+print(A/B)
+```
+<br>
+<br>
+#### 해결책 2
+소스 코드(Python 3)  
+```python
+A, B = map(int, input().split())
+print(A/B)
+```
+<br>
+<br>
+<br>
+
+
+
+
 
