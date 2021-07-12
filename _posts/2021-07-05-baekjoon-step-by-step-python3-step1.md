@@ -227,3 +227,26 @@ print(((A%C) + (B%C))%C)
 print((A*B)%C)
 print(((A%C)*(B%C))%C)
 ```
+
+### 예제 11단계, 2588번, "곱셈", 수학, 사칙연산
+[백준 2588번 문제](https://www.acmicpc.net/problem/2588)
+#### 해결책 
+```python
+A = int(input())
+B = input()
+BB = []
+for i in str(B):
+  BB.append(i)
+print(A*int(BB[2]))
+print(A*int(BB[1]))
+print(A*int(BB[0]))
+print(A*int(BB[2])+10*A*int(BB[1])+100*A*int(BB[0]))
+```
+
+
+
+
+
+
+
+
