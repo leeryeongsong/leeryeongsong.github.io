@@ -1,5 +1,5 @@
 ---
-title: "Leeryeong's Blog"
+title: "LeeRyeong's Blog"
 permalink: /about/
 layout: single
 ---
