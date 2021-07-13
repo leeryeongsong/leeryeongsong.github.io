@@ -97,7 +97,7 @@ author:
   name             : "LeeRyeong Song"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "안녕하세요."
-  location         : "Republic of Korea(South Korea)"
+  location         : "Republic of Korea"
   email            : "leeryeongsong0806@gmail.com"
   links:
     - label: "Email"
