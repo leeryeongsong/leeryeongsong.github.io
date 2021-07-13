@@ -1,6 +1,6 @@
 ---
 title:  "[2단계] 파이썬3으로 백준 단계별로 풀어보기- if문"
-excerpt: "2단계 1330번"
+excerpt: "2단계 1330번, 9498번, 2753번"
 
 categories:
   - baekjoon
@@ -48,3 +48,46 @@ elif A<B:
 else:
   print("==")
 ```
+
+
+
+
+
+### 예제 2단계, 9498번, "시험 성적", 구현
+[백준 9498번 문제](https://www.acmicpc.net/problem/9498)
+#### 해결책 
+```python
+Score = int(input())
+if Score>=90:
+  print("A")
+elif Score>=80:
+  print("B")
+elif Score>=70:
+  print("C")
+elif Score>=60:
+  print("D")
+else:
+  print("F")
+```
+elif문을 여러 번 사용하여 점수 구간에 따라 성적을 출력한다.
+
+
+### 예제 3단계, 2753번, "윤년", 수학, 구현
+[백준 2753번 문제](https://www.acmicpc.net/problem/2753)
+#### 해결책 
+```python
+Year = int(input())
+if Year%4==0:
+  if Year%100==0:
+    if Year%400==0:
+      print("1")
+    else: 
+      print("0")
+  else:
+    print("1")    
+else:
+  print("0")
+```
+4의 배수가 아니면 평년이므로 0 출력  
+4의 배수가 맞고, 100의 배수가 아니면 윤년이므로 1 출력  
+4의 배수가 맞고, 100의 배수이면, 400의 배수인가 확인. 맞으면 윤년이므로 1 출력, 아니면 평년이므로 0 출력
