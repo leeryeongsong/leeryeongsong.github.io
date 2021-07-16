@@ -1,6 +1,9 @@
 ---
 title:  "[1단계] 파이썬3으로 백준 단계별로 풀어보기- 입출력과 사칙연산"
 excerpt: "1단계 2557번, 10718번, 10171번, 10172번, 1000번, 1001번, 10998번, 1008번, 10869번, 10430번, 2588번"
+toc: true
+toc_sticky: true
+toc_label: "Baekjoon-step1"
 
 categories:
   - baekjoon
@@ -13,9 +16,6 @@ tags:
   - 입출력
   - 사칙연산
   - 수학
-toc: true
-toc_sticky: true
-toc_label: "Baekjoon-step1"
 ---
 <br>
 백준의 **저작권** 안내에 따라   
