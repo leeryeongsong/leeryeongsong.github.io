@@ -13,6 +13,9 @@ tags:
   - 입출력
   - 사칙연산
   - 수학
+toc: true
+toc_sticky: true
+toc_label: "Baekjoon-step1"
 ---
 <br>
 백준의 **저작권** 안내에 따라   
