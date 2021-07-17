@@ -1,6 +1,6 @@
 ---
 title:  "[3단계] 파이썬3으로 백준 단계별로 풀어보기- for문"
-excerpt: "3단계 2739번, 10950번, 8393번, 15552번"
+excerpt: "3단계 2739번, 10950번, 8393번, 15552번, 2741번, 2742번"
 
 categories:
   - baekjoon
@@ -107,3 +107,35 @@ input()대신 sys.stdin.readline()을 쓰기 위해 sys를 import 한다.
 for문을 활용하여 a,b값에 입력받은 두 값을 대입하고, print로 두 값의 합을 출력한다.  
 <br>
 <br>
+### 예제 5단계, 2741번, "N찍기", 구현
+[백준 2741번 문제](https://www.acmicpc.net/problem/2741)
+#### 해결책 
+```python
+N = int(input())
+
+for i in range(1, N+1):
+  print(i)
+```
+N 입력 받고, for-range()로 1부터 N까지 출력한다.
+<br>
+<br>
+
+### 예제 6단계, 2742번, "기찍N", 구현
+[백준 2742번 문제](https://www.acmicpc.net/problem/2742)
+#### 해결책 
+```python
+N = int(input())
+
+for i in range(N, 0, -1):
+  print(i)
+```
+N 입력 받고, for-range()로 N부터 1까지 출력한다.  
+range()를 활용하여 역순으로 출력할 때는 증가폭을 음수로 지정하면 된다.
+range(시작, 끝, 증가폭)  
+<br>
+<br>
+
+
+
+
+
