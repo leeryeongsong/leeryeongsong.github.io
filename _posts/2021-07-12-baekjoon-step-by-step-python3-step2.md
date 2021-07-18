@@ -1,7 +1,9 @@
 ---
 title:  "[2단계] 파이썬3으로 백준 단계별로 풀어보기- if문"
 excerpt: "2단계 1330번, 9498번, 2753번, 14681번, 2884번"
-
+toc: true
+toc_sticky: true
+toc_label: "백준 단계별로 풀어보기 2단계"
 categories:
   - baekjoon
 tags:
@@ -34,11 +36,11 @@ tags:
 아래 소제목 이름은  
 **(예제 n단계), (문제 번호), (문제 제목), (알고리즘 분류) 순서**입니다.  
 <br>
-
+<br>
 
 ### 예제 1단계, 1330번, "두 수 비교하기", 수학, 구현, 사칙연산
-[백준 1330번 문제](https://www.acmicpc.net/problem/1330)
-#### 해결책 
+[백준 1330번 문제](https://www.acmicpc.net/problem/1330)  
+**해결책**  
 ```python
 A, B = map(int, input().split())
 
@@ -52,12 +54,12 @@ else:
 A가 B보다 크면(if) > 출력  
 if 조건이 틀리고, A<B이면(elif) < 출력  
 위 조건 모두 틀리면(else) == 출력
-
-
+<br>
+<br>
 
 ### 예제 2단계, 9498번, "시험 성적", 구현
 [백준 9498번 문제](https://www.acmicpc.net/problem/9498)
-#### 해결책 
+**해결책**  
 ```python
 Score = int(input())
 if Score>=90:
@@ -77,10 +79,12 @@ Score>=90이면(if) A출력
 위의 조건들 모두 틀리고(Score<80), Score>=70이면(elif)...70<=Score<80, C출력  
 위의 조건들 모두 틀리고(Score<70), Score>=60이면(elif)...60<=Score<70, D출력  
 위의 조건들 모두 틀리면(Score<60, else) F 출력
+<br>
+<br>
 
 ### 예제 3단계, 2753번, "윤년", 수학, 구현
 [백준 2753번 문제](https://www.acmicpc.net/problem/2753)
-#### 해결책 
+**해결책**  
 ```python
 Year = int(input())
 if Year%4==0:
@@ -97,11 +101,12 @@ else:
 4의 배수가 아니면 평년이므로 0 출력  
 4의 배수가 맞고, 100의 배수가 아니면 윤년이므로 1 출력  
 4의 배수가 맞고, 100의 배수이면, 400의 배수인가 확인. 맞으면 윤년이므로 1 출력, 아니면 평년이므로 0 출력
-
+<br>
+<br>
 
 ### 예제 4단계, 14681번, "사분면 고르기", 수학, 구현, 
 [백준 14681번 문제](https://www.acmicpc.net/problem/14681)
-#### 해결책 
+**해결책**  
 ```python
 x = int(input())
 y = int(input())
@@ -118,11 +123,12 @@ else:
 ```
 x가 양수일 때(if), 다시 if-else문으로 y양수이면(if) 제1사분면, 아니면(else) 제4사분면  
 x가 양수가 아닐 때(else), 다시 if-else문으로 y양수이면(if) 제2사분면, 아니면(else) 제3사분면  
-
+<br>
+<br>
 
 ### 예제 5단계, 2884번, "알람 시계", 수학, 사칙연산
 [백준 2884번 문제](https://www.acmicpc.net/problem/2884)
-#### 해결책 
+**해결책**  
 ```python
 H, M = map(int, input().split())
 if M>=45:
