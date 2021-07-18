@@ -58,7 +58,7 @@ if 조건이 틀리고, A<B이면(elif) < 출력
 <br>
 
 ### 예제 2단계, 9498번, "시험 성적", 구현
-[백준 9498번 문제](https://www.acmicpc.net/problem/9498)
+[백준 9498번 문제](https://www.acmicpc.net/problem/9498)  
 **해결책**  
 ```python
 Score = int(input())
@@ -83,7 +83,7 @@ Score>=90이면(if) A출력
 <br>
 
 ### 예제 3단계, 2753번, "윤년", 수학, 구현
-[백준 2753번 문제](https://www.acmicpc.net/problem/2753)
+[백준 2753번 문제](https://www.acmicpc.net/problem/2753)  
 **해결책**  
 ```python
 Year = int(input())
@@ -105,7 +105,7 @@ else:
 <br>
 
 ### 예제 4단계, 14681번, "사분면 고르기", 수학, 구현, 
-[백준 14681번 문제](https://www.acmicpc.net/problem/14681)
+[백준 14681번 문제](https://www.acmicpc.net/problem/14681)  
 **해결책**  
 ```python
 x = int(input())
@@ -127,7 +127,7 @@ x가 양수가 아닐 때(else), 다시 if-else문으로 y양수이면(if) 제2�
 <br>
 
 ### 예제 5단계, 2884번, "알람 시계", 수학, 사칙연산
-[백준 2884번 문제](https://www.acmicpc.net/problem/2884)
+[백준 2884번 문제](https://www.acmicpc.net/problem/2884)  
 **해결책**  
 ```python
 H, M = map(int, input().split())
