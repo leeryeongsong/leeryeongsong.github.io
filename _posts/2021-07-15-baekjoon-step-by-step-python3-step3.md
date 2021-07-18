@@ -38,7 +38,7 @@ tags:
 
 
 ### 예제 1단계, 2739번, "구구단", 수학, 구현, 사칙연산
-[백준 2739번 문제](https://www.acmicpc.net/problem/2739)
+[백준 2739번 문제](https://www.acmicpc.net/problem/2739)  
 **해결책**  
 ```python
 N = int(input())
@@ -52,7 +52,7 @@ range(1, 10)은 1부터 9까지 연속된 숫자를 시퀀스(범위)로 만드�
 <br>
 
 ### 예제 2단계, 10950번, "A+B\-3", 수학, 구현, 사칙연산
-[백준 10950번 문제](https://www.acmicpc.net/problem/10950)
+[백준 10950번 문제](https://www.acmicpc.net/problem/10950)  
 **해결책**  
 ```python
 T = int(input())
@@ -77,7 +77,7 @@ A와 B 숫자쌍의 합을 T번 출력.
 <br>
 
 ### 예제 3단계, 8393번, "합", 수학, 구현
-[백준 8393번 문제](https://www.acmicpc.net/problem/8393)
+[백준 8393번 문제](https://www.acmicpc.net/problem/8393)  
 **해결책**   
 ```python
 n = int(input())
@@ -93,7 +93,7 @@ range(1, n\+1)은 1부터 n까지 연속된 숫자를 시퀀스(범위)로 만�
 <br>
 
 ### 예제 4단계, 15552번, "빠른 A\+B", 수학, 구현, 사칙연산
-[백준 15552번 문제](https://www.acmicpc.net/problem/15552)
+[백준 15552번 문제](https://www.acmicpc.net/problem/15552)  
 **해결책**  
 ```python
 import sys
@@ -110,7 +110,7 @@ for문을 활용하여 a, b값에 입력받은 두 값을 대입하고, print로
 <br>
 <br>
 ### 예제 5단계, 2741번, "N찍기", 구현
-[백준 2741번 문제](https://www.acmicpc.net/problem/2741)
+[백준 2741번 문제](https://www.acmicpc.net/problem/2741)  
 **해결책**  
 ```python
 N = int(input())
@@ -123,7 +123,7 @@ N 입력받고, for-range()로 1부터 N까지 출력한다.
 <br>
 
 ### 예제 6단계, 2742번, "기찍N", 구현
-[백준 2742번 문제](https://www.acmicpc.net/problem/2742)
+[백준 2742번 문제](https://www.acmicpc.net/problem/2742)  
 **해결책**  
 ```python
 N = int(input())
@@ -137,7 +137,7 @@ range(시작, 끝, 증가 폭)
 <br>
 <br>
 ### 예제 6단계, 2742번, "기찍N", 구현
-[백준 2742번 문제](https://www.acmicpc.net/problem/2742)
+[백준 2742번 문제](https://www.acmicpc.net/problem/2742)  
 **해결책**  
 ```python
 N = int(input())
@@ -151,7 +151,7 @@ range(시작, 끝, 증가 폭)
 <br>
 <br>
 ### 예제 7단계, 11021번, "A+B-7", 수학, 구현, 사칙연산
-[백준 11021번 문제](https://www.acmicpc.net/problem/11021)
+[백준 11021번 문제](https://www.acmicpc.net/problem/11021)  
 **해결책**  
 ```python
 import sys
@@ -191,7 +191,7 @@ Case # 1 : 3
 <br>
 <br>
 ### 예제 8단계, 11022번, "A+B-8", 수학, 구현, 사칙연산
-[백준 11022번 문제](https://www.acmicpc.net/problem/11022)
+[백준 11022번 문제](https://www.acmicpc.net/problem/11022)  
 **해결책**  
 ```python
 import sys
