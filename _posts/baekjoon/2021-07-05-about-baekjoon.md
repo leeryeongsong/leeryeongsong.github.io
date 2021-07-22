@@ -1,7 +1,8 @@
 ---
 title:  "백준 사이트 소개, 이용 방법 및 Tip, 저작권 관련 안내글"
 excerpt: "백준은 온라인 프로그래밍 문제 풀이 및 채점 사이트, 이 블로그는 백준의 저작권 관련 공지를 준수합니다."
-
+toc: true
+toc_sticky: true
 categories:
   - baekjoon
 tags:
