@@ -1,6 +1,6 @@
 ---
 title:  "[5단계] 파이썬3으로 백준 단계별로 풀어보기- 1차원 배열"
-excerpt: "5단계 10818번, 2562번"
+excerpt: "5단계 10818번, 2562번, 2577번, 3052번, 1546번, 8958번"
 toc: true
 toc_sticky: true
 toc_label: "백준 단계별로 풀어보기 5단계"
@@ -148,5 +148,101 @@ print(len(new_a))
 리스트 a가 [1, 1, 2, 1, 3, 4, 5, 1, 7, 8]라면,  
 첫 번째로 나오는 1을 제외한 1이 모두 제거되는 것과 결과가 같다.  
 리스트 new_a는 [1, 2, 3, 4, 5, 7, 8]이 된다.   
+<br>
+<br>
+### 예제 5단계, 1546번, "평균", 수학, 사칙연산 
+[백준 1546번 문제](https://www.acmicpc.net/problem/1546)  
+**해결책1**  
+```python
+N = int(input())
+score = list(map(int, input().split()))
+new_score = [0 for i in range(N)]
+# new_score = []이라고 하면, 리스트에 원소가 없는 상태에서 score[0] =1처럼 원소를 지정할 수 없으므로(IndexError: list assignment index out of range), 0을 N개 대입한다. 
+M = max(score)
+
+for i in range(N):
+    new_score[i] = (score[i]/M)*100
+average = sum(new_score)/N
+print(average)
+
+```
+N에 시험 본 과목의 개수를 입력받는다.  
+리스트 score에 세준이의 현재 성적을 공백을 기준으로 나누어 입력받는다.  
+이후 새롭게 계산할 성적을 입력받을 리스트, new_score을 0으로 초기화한다.  
+<br>
+만약, new_score = [] 이렇게 빈 리스트로 선언하면  
+이후 과정에서 new_score[0] = 1처럼 특정 인덱스에 원소를 지정할 수 없다.  
+이를 해결하려면  
+1) 리스트 길이를 지정하고 0으로 초기화하거나   
+2) inset() 또는 append() 메소드를 사용하기  
+해결책1은 1)의 방법을 사용했고  
+아래 해결책2는 2)의 방법을 사용했다.  
+<br>
+문제로 돌아와서, 현재 성적 중 최댓값을 M에 대입한다.  
+for-range문으로 과목 개수 만큼, for문을 반복한다.  
+새로 계산한 과목 점수를 new_score[i]에 대입한다.  
+새로 계산한 과목 점수(new_score)의 평균을 구하고, 이를 출력한다.  
+<br>  
+
+**해결책2**  
+```python
+N = int(input())
+score = list(map(int, input().split()))
+new_score = []
+# new_score = []이라고 했으므로, 아래에 new_score.append(score[i]/M*100) 식을 사용했다.  
+M = max(score)
+
+for i in range(N):
+    new_score.append(score[i]/M*100)
+average = sum(new_score)/N
+print(average)
+```
+문자열.append(추가할 원소) 메소드를 사용했다.  
+문자열.insert(인덱스 번호, 추가할 원소) 메소드를 사용해도 된다.  
+
+<br>
+<br>
+### 예제 6단계, 8958번, "OX퀴즈", 구현, 문자열  
+[백준 8958번 문제](https://www.acmicpc.net/problem/8958)  
+**해결책**  
+```python
+N = int(input())
+
+for i in range(N):
+    score = 0
+    sum = 0
+    test = input()
+    test_list = list(test)
+    for j in range(len(test_list)):
+        if test_list[j] == "O":
+            score += 1
+        else: 
+            score = 0
+        sum += score    
+    print(sum)
+```
+테스트 케이스의 개수를 N에 입력받는다.  
+<br>
+테스트 개수 N번 만큼 for문을 반복한다.  
+score는 문제의 점수를 대입할 변수이고 sum은 해당 테스트 케이스의 점수를 합해서 저장할 변수이다.  
+for문의 초반부에 score와 sum을 0으로 초기화한다.  
+OX퀴즈 결과를 문자열로 입력받아서 test에 대입한다.  
+test 문자열을 리스트 자료형으로 변환하여, test_list라고 이름붙인다.  
+<br>
+test_list의 길이만큼(= 문제 개수만큼) 두번째 for문을 반복한다.  
+문제의 점수(score)는 그 문제까지 연속된 O의 개수이다.  
+문제를 맞을 때마다 score에 1을 더하고, 문제를 틀리면 이전까지의 '연속된 O의 개수' 기록이 깨지므로 score를 0으로 초기화한다.   
+그리고 각 문제의 점수를 sum 변수에 더하면 된다.  
+즉,  
+test_list의 j번째 원소가 "O"라면(if), score에 1을 더하고 if-else문을 빠져나와 sum에 score를 더한다.  
+test_list의 j번째 원소가 "O"이 아니라면(="X"라면, else), score를 0으로 초기화하고 if-else문을 빠져나와 sum에 score를 더한다.  
+<br>
+for문을 test_list의 원소 개수만큼 반복하여 test_list의 마지막 원소까지 sum을 구하면,  
+두번째 for문을 끝내고 sum을 출력한다.  
+이제 입력받은 테스트 케이스 한 줄에 대한 점수를 출력했다.  
+<br>
+다음 OX퀴즈 결과도 입력받고, 동일한 과정을 거친다.  
+<br>
+이렇게 총 N번 반복하여(첫 번째 for문) 각 테스트 케이스의 점수를 모두 출력하면 된다.  
 <br>
 <br>
