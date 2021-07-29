@@ -1,6 +1,6 @@
 ---
 title:  "[7단계] 파이썬3으로 백준 단계별로 풀어보기- 문자열"
-excerpt: "7단계 11654번, 11720번, 10809번, 2675번"
+excerpt: "7단계 11654번, 11720번, 10809번, 2675번, 1157번, 1152번"
 toc: true
 toc_sticky: true
 toc_label: "백준 단계별로 풀어보기 7단계"
@@ -247,4 +247,353 @@ for문이 끝나고
 <br> 
 문제 조건을 모두 충족했다.  
 <br>
+<br> 
+### 예제 5단계, 1157번, "단어 공부", 구현, 문자열
+[백준 1157번 문제](https://www.acmicpc.net/problem/1157)  
+에러가 나온 코드도 작성했기에, '해결책'이 아니라 '코드(숫자)'로 소제목을 작성했다.
+**코드1**  
+```python
+# 메모리 31156KB 시간 392ms
+words= input()
+words_list = [0 for i in range(26)]
+for i in words:
+    if ord(i) <= 90:
+        words_list[ord(i)-65] +=1
+    else:
+        words_list[ord(i)-97] +=1
+words_list_max = max(words_list)
+if words_list.count(words_list_max) == 1:
+    words_list_max_index = words_list.index(words_list_max)
+    print(chr(words_list_max_index+65))
+else:
+    print('?')
+```
+코드1에서는 대소문자를 구분하여 처리하고, 아스키 코드를 적극 활용했다.  
+<br>
+문자열을 입력받아 words에 저장하고,   
+알파벳이 입력된 횟수를 저장하기 위한 리스트 words_list를 0으로 초기화했다.  
+```python
+words= input()
+words_list = [0 for i in range(26)]
+```
+<br>
+문자열 중 가장 많이 사용된 알파벳을 알고 싶은데, 대소문자 구분이 없다고 한다.   
+<br>
+**알파벳 ABC 순서대로 리스트 words_list에 각 알파벳의 입력 횟수를 저장**하는데,  
+<br>
+대문자 A를 인식했을 때 리스트 words_list\[0]에 입력 횟수를 \+1 추가,  
+소문자 a를 인식했을 때도 리스트 words_list\[0]에 입력 횟수를 \+1 추가하는 방식을 사용해보자.  
+<br>
+대문자 A의 아스키 코드는 65이고, 이후 알파벳 대문자는 순서대로 아스키 코드가 1씩 증가한다.  
+소문자 a의 아스키 코드는 97이고, 이후 알파벳 소문자는 순서대로 아스키 코드가 1씩 증가한다.  
+<br>
+for문으로 words의 각 요소 i에 대해,  
+if문으로  
+문자열 i의 아스키 코드(ord(i))가 90이하라면(if) 알파벳 대문자므로, (아스키 코드-65)를 인덱스로 갖는 리스트 원소에 +1을 추가하여 저장한다.  
+문자열 i의 아스키 코드(ord(i))가 90이하가 아니라면(else, 91이상) 알파벳 소문자이므로, (아스키 코드-97)를 인덱스로 갖는 리스트 원소에 +1을 추가하여 저장한다.  
+```python
+for i in words:
+    if ord(i) <= 90:
+        words_list[ord(i)-65] +=1
+    else:
+        words_list[ord(i)-97] +=1
+```
+이제 알파벳 ABC 순서대로, 각 알파벳의 입력 횟수를 리스트 words_list에 저장했다.  
+<br>
+**리스트 words_list의 최댓값**을 구하자.  
+리스트 words_list의 최댓값을 max() 함수로 구하여 변수 words_list_max에 대입한다.  
+```python
+words_list_max = max(words_list)
+```
+<br>
+**가장 많이 사용된 알파벳이 1개로 유일하다면(if)**,  
+words_list_max와 같은 값을 갖는 원소의 개수가 1개와 같다.  
+count() 메소드를 사용하면 소괄호 안의 자료가 리스트 안에 존재하는 개수를 알 수 있다.  
+```python
+if words_list.count(words_list_max) == 1:
+```
+<br>
+**가장 많이 사용된 알파벳**의 입력 횟수는 알고 있지만(words_list_max)  
+해당 알파벳이 **무엇인지**는 아직 모르고 있다.  
+이를 찾아내기 위해  
+words_list_max 값을 갖고 있는 원소의 인덱스를 index() 메소드로 구하여 변수 words_list_max_index에 저장했다.  
+words_list_max_index에 65를 더하여, chr()로 아스키코드를 문자열로 바꾸면,   
+가장 많이 사용된 알파벳이 대문자로 출력된다.  
+```python
+    words_list_max_index = words_list.index(words_list_max)
+    print(chr(words_list_max_index+65))
+```
+<br>
+<br>
+예)  
+문제에서 제시된 예제 입력 2은 다음과 같다.  
+zZa  
+words_list는 다음과 같다.  
+\[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2\]  
+words_list_max는 2이고,  
+2를 갖고 있는 원소의 인덱스는   
+words_list_max_index, 25이다.  
+위 리스트는 알파벳 순서대로 입력 횟수가 저장된 것이므로  
+인덱스 25의 원소에는 26번째 알파벳 Z가 입력된 횟수가 저장된다.  
+인덱스 25에 65를 더하면 90이고, 이는 알파벳 Z의 아스키 코드와 같다.  
+90을 함수 chr()에 대입하면, chr(90), Z가 나온다.  
+
+**가장 많이 사용된 알파벳이 1개가 아니라면(else, 2개 이상)**  
+문제 조건에 맞춰 ?를 출력한다.  
+```python
+else:
+    print('?')
+```
+
+<br> 
+<br> 
+**코드2**  
+```python
+# 메모리 31156KB 시간 284ms
+words= input().upper()
+words_list = [0 for i in range(26)]
+for i in words:
+    words_list[ord(i)-65] +=1
+words_list_max = max(words_list)
+if words_list.count(words_list_max) == 1:
+    words_list_max_index = words_list.index(words_list_max)
+    print(chr(words_list_max_index+65))
+else:
+    print('?')
+```
+코드 2에서는  
+코드 1에서, **str.upper() 메소드를 적용**했다.  
+upper() 메소드는 문자열의 **모든 알파벳을 대문자로 바꾼 문자열을 반환**한다.  
+소괄호에 입력한 문자열이 바뀌는 게 아니라,  
+대문자로 바뀐 문자열이 새로 생성된다.  
+<br>
+유사한 메소드로  
+lower() 메소드는 문자열의 모든 알파벳을 소문자로 바꾼 문자열을 반환한다.  
+upper() 메소드와 마찬가지로, 새로운 문자열이 생성되는 것이다.   
+<br>
+아래에 같이  
+```python
+words= input().upper()
+```
+input() 함수에 .(dot)을 찍고 이어서 upper() 메소드를 작성하면,  
+input()으로 문자열을 입력받고 이어서 upper() 메소드로 새로운 문자열을 반환하고, 이 새로운 문자열을 words에 대입한다.   
+<br>
+이후 과정은  
+코드1과 비교했을 때  
+**if문으로 알파벳 대문자와 소문자를 구분하는 과정이 사라졌다.**  
+모든 알파벳이 대문자이기 때문이다.  
+
+<br> 
+<br> 
+**코드3(시간 초과)**  
+```python
+words= input().upper()
+words_list = [0 for i in range(26)]
+for i in words:
+    words_list[ord(i)-65] = words.count(i)
+words_list_max = max(words_list)
+if words_list.count(words_list_max) == 1:
+    words_list_max_index = words_list.index(words_list_max)
+    print(chr(words_list_max_index+65))
+else:
+    print('?')
+```
+코드2에서  
+**알파벳 입력 횟수를 저장할 때 count() 메소드를 적용했다(시간 초과).**  
+```python
+for i in words:
+    words_list[ord(i)-65] = words.count(i)
+```
+for문으로 입력받은 words의 각 요소에 대해  
+리스트의 요소에 알파벳 입력 횟수를 1씩 더하는 것이 아니라,  
+count()로 words 중 해당 알파벳의 개수를 대입했는데...  
+<br>
+**for문의 i 범위 지정이 넓어서(i가 중복되어서) 시간 초과가 발생한 것 같다.**  
+<br>
+예시로  
+aaaAAAbb를 입력하면 upper() 메소드를 거쳐  
+AAAAAABB로 저장되고,  
+for문으로 AAAAAABB의 각 요소에 대해 반복문을 진행하기 때문에,   
+첫 번째 요소 A에 대해, words_list\[ord(A)-65]에 words.count(A)를 저장하고    
+두 번째 요소 A에 대해, words_list\[ord(A)-65]에 words.count(A)를 저장하고   
+세 번째 요소 A에 대해, words_list\[ord(A)-65]에 words.count(A)를 저장하고  
+네 번째 요소 A에 대해, words_list\[ord(A)-65]에 words.count(A)를 저장하고  
+...
+이렇게 중복되는 과정을 거친다.  
+<br>
+이를 해결하기 위해 다음 코드4에서 set 자료형을 적용했다.  
+<br>
+<br>
+**코드4(런타임 에러(TypeError))**  
+```python
+words= input().upper()
+words_set = set(words)
+print(words_set)
+words_fre = []
+
+for i in words_set:
+    words_fre.append(words.count(i))
+
+if words_fre.count(max(words_fre)) == 1:
+    print(words_set[words_fre.index(max(words_fre))])//여기에서 TypeError 발생
+else:
+    print('?')
+```
+
+**for문의 i를 set 자료형에서 가져오면**  
+set 자료형은 중복을 허용하지 않기에  
+코드3에서 문제 되었던...같은 일을 반복하는 과정을 피할 수 있다!  
+<br>
+이때,  
+**for문의 i는 set 자료형에서 가져오지만  
+i의 개수를 구할 때는 기존의 문자열 words에서 가져올 것!**  
+i의 개수를 set 자료형에서 가져온다면 1만 리스트에 저장된다.   
+```python
+for i in words_set:
+    words_fre.append(words.count(i))
+```
+<br>
+문제는  
+**런타임 에러(TypeError)!!!!**    
+set 자료형을 적용한 것은 좋은데,  
+**set 자료형은 순서가 없으므로 인덱스로 접근할 수 없다**는 것을...간과했다.   
+```python
+    print(words_set[words_fre.index(max(words_fre))])//여기에서 TypeError 발생
+```
+<br>
+혹시나 다음에도 같은 일을 저지를 수 있으니... 이렇게 시행착오도 기록한다.  
+<br>
+위 문제는 다음 코드5에서 해결했다.  
+
+<br> 
+<br> 
+**코드5**  
+```python
+# 메모리 31156KB, 시간 120ms
+words= input().upper()
+words_set_list = list(set(words))
+words_fre = []
+for i in words_set_list:
+    words_fre.append(words.count(i))
+if words_fre.count(max(words_fre)) == 1:
+    print(words_set_list[words_fre.index(max(words_fre))])
+else:
+    print('?')
+```
+
+위의 런타임 에러(TypeError)는  
+**set 자료형을 list 자료형으로 바꾸면 해결되는 간단한 문제!**  
+```python
+words_set_list = list(set(words))
+```
+<br>
+set 자료형에 인덱스로 접근했던 부분도  
+아래와 같이 수정했다.  
+```python
+    print(words_set_list[words_fre.index(max(words_fre))])
+```
+<br>
+앞의 코드1, 2에 비교했을 때  
+코드 시간이 크게 감소했다!!  
+
+<br> 
+<br> 
+**코드6**  
+```python
+# 메모리 31156KB, 시간 120ms
+words= input().upper()
+words_set_list = list(set(words))
+words_fre = dict()
+for i in words_set_list:
+    words_fre[i] = words.count(i)
+max_words_value = max(words_fre.values())
+max_words = [key for key, value in words_fre.items() if value == max_words_value]
+if len(max_words) == 1:
+    print(max_words[0])
+else:
+    print('?')
+```
+코드5에서,  
+**알파벳의 입력 빈도를 저장할 때 dictioinary 자료형으로 저장**하고 싶어서 작성했다.  
+<br>
+**dict() 함수로 빈 딕셔너리를 선언**한다.  
+```python
+words_fre = dict()
+```
+
+**알파벳의 입력 횟수를 딕셔너리에 저장하자.**   
+for문으로 words_set_list에서 i를 가져와서,  
+i를 딕셔너리 words_fre의 key로, words.count(i)를 딕셔너리 words_fre의 value 값으로 추가한다.  
+```python
+for i in words_set_list:
+    words_fre[i] = words.count(i)
+```
+<br>
+딕셔너리 words_fre의 **value 중 최댓값**을 구하기 위해,  
+values() 메소드로 딕셔너리의 value 값에 접근하고  
+max() 함수로 value 값 중 최대값을 구해,  
+변수 max_words_value에 대입했다.  
+```python
+max_words_value = max(words_fre.values())
+```
+<br>
+**최대 value는 알았지만, 그의 key값은 아직 모른다.  
+key 값을 찾아내기 위해**    
+리스트 컴프리헨션을 적용한 다음 코드를 사용했다.  
+```python
+max_words = [key for key, value in words_fre.items() if value == max_words_value]
+```
+리스트 컴프리헨션으로 최대 value에 대한 key 찾는 법 알려준 링크 [[Python] dictionary max value에 대한 key 찾기](https://bio-info.tistory.com/40)  
+<br>
+items() 메소드로 딕셔너리 words_fre의 key, value 쌍에 접근한 다음,  
+if로 value가 max_words_value와 동일한 사례에 대해,  
+key 값을 가져와서 리스트 형태로 저장한다.  
+<br>
+이 리스트의 길이가 1과 같으면 리스트\[0] 출력(= 가장 많이 사용된 알파벳이 1개로 유일),  
+이 리스트의 길이가 1과 같지 않다면 ? 출력한다.  
+```python
+if len(max_words) == 1:
+    print(max_words[0])
+else:
+    print('?')
+```
+<br>
+최대 value에 대한 key를 출력하는 방법에는  
+아래 링크에서 알려준 것처럼 다양한 방법이 있지만,  
+<br>
+매우 다양한 방법을 설명한 링크 [[python] 사전에서 최대 값을 가진 키를 얻습니까?](http://daplus.net/python-%EC%82%AC%EC%A0%84%EC%97%90%EC%84%9C-%EC%B5%9C%EB%8C%80-%EA%B0%92%EC%9D%84-%EA%B0%80%EC%A7%84-%ED%82%A4%EB%A5%BC-%EC%96%BB%EC%8A%B5%EB%8B%88%EA%B9%8C/)  
+<br>
+다른 방법들은 value가 최대인 key가 1개만 존재할 때 유용하고,  
+이 문제처럼 value가 최대인 key가 여러 개 존재할 수 있을 때는 리스트 컴프리헨션이 사용하기 적절했다.  
+<br> 
+<br>
+리스트 컴프리헨션에 대한 내용  
+[22.5 리스트 표현식 사용하기](https://dojang.io/mod/page/view.php?id=2285)  
+[2.6 리스트 컴프리헨션](https://wikidocs.net/84393)  
+[1) 리스트 컴프리헨션](https://wikidocs.net/22805)  
+
+
+<br> 
+<br> 
+### 예제 6단계, 1152번, "문자열 반복", 구현, 문자열
+[백준 1152번 문제](https://www.acmicpc.net/problem/1152)  
+**해결책**  
+```python
+words_list = input().split()
+print(len(words_list))
+```
+입력받은 문자열에서, 띄어쓰기를 기준으로 단어의 개수를 출력해야 한다.  
+이 경우, 파이썬의 split() 메소드를 사용하면 간단하게 해결할 수 있다.  
+split() 메소드는 소괄호 안에 입력된 문자를 기준으로 문자열을 나눠준다.  
+소괄호 안에 입력된 것이 없으면, 공백을 기준으로 문자열을 나눈다.  
+<br>
+input().split()으로 input()과 split()을 .으로 이어서 입력하면,  
+왼쪽부터 함수 또는 메소드를 사용하여,  
+문자열을 입력받고, 입력받은 문자열을 공백을 기준으로 나누고 리스트 형태로 저장한다.  
+<br>
+만약 파이썬이 아니라 다른 언어로 사용하는데 split() 메소드와 같은 함수가 없을 경우,  
+띄어쓰기를 인식할 때마다 단어의 개수에 +1을 더해야 한다.  
+그리고 문자열의 앞과 뒤에 공백이 포함될 수 있으므로,  
+앞과 뒤에 공백이 인식되면 단어의 개수에 -1을 빼야 한다.  
+<br> 
 <br> 
