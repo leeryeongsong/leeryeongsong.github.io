@@ -1,6 +1,6 @@
 ---
 title:  "[7단계] 파이썬3으로 백준 단계별로 풀어보기- 문자열"
-excerpt: "7단계 11654번, 11720번, 10809번, 2675번, 1157번, 1152번"
+excerpt: "7단계 11654번, 11720번, 10809번, 2675번, 1157번, 1152번, 2908번, 5622번, 2941번, 1316번"
 toc: true
 toc_sticky: true
 toc_label: "백준 단계별로 풀어보기 7단계"
@@ -26,7 +26,7 @@ tags:
 **사용 언어: Python 3**  
 **외부 에디터: Visual Studio Code**  
 <br>
-7단계 작성 기간 : 2021년 7월 27일 ~ 2021년 7월 
+7단계 작성 기간 : 2021년 7월 27일 ~ 2021년 7월 31일
 <br>
 <br>
 # 7단계, 문자열
@@ -957,6 +957,221 @@ for i in words:
 ```python
 print(sec)
 ```
+<br>
+문제 조건을 충족했다.  
+<br> 
+<br> 
+### 예제 9단계, 2941번, "크로아티아 알파벳", 구현, 문자열
+[백준 2941번 문제](https://www.acmicpc.net/problem/2941)  
+**시행착오**  
+```python
+# 특수 조합의 개수를 측정하고 삭제했더니, 문제 발생
+# 예제 nljj에서 lj를 없애면 nj가 남는데, nj가 새로운 크로아티아 알파벳으로 인식된다.
+words = input()
+count = 0
+
+count += words.count('c=')
+words = words.replace('c=','')
+
+count += words.count('c-')
+words = words.replace('c-','')
+
+count += words.count('dz=')
+words = words.replace('dz=','')
+
+count += words.count('d-')
+words = words.replace('d-','')
+
+count += words.count('lj')
+words = words.replace('lj','')
+
+count += words.count('nj')
+words = words.replace('nj','')
+
+count += words.count('s=')
+words = words.replace('s=','')
+
+count += words.count('z=')
+words = words.replace('z=','')
+
+count += len(words)
+
+print(count)
+```
+<br>
+<br>
+(c=, c-, dz=, d-, lj, nj, s=, z=)  
+2~3개의 알파벳 또는 기호로 이루어진 특수 조합을 크로아티아 한 글자로 인식해야 한다.  
+위 특수 조합에 해당하지 않는 알파벳은 한 글자로 인식해야 한다.  
+<br>
+<br>
+* * *
+처음에 작성한 코드는   
+특수 조합이 문자열 안에 몇 개 있는지 계산하고, 해당 특수 조합을 문자열에서 삭제하는 방법을 사용했다.  
+```python
+count += words.count('c=')
+words = words.replace('c=','')
+```
+str.count('문자열', start, end) 메소드는 str 문자열 안에서 '문자열'이 포함된 개수를 반환한다. start와 end에 메소드 실행 범위를 인덱스로 지정할 수 있고, 범위 지정을 생략할 수 있다. 범위 지정 시 end는 범위에 포함되지 않는다.  
+<br>
+str.replace(old, new\[, count]) 메소드는 str 문자열 안에서 old(문자열)를 new(문자열)로 바꾼 후 새로운 문자열을 반환한다.  
+count는 왼쪽부터, 바꿀 횟수를 지정할 때 입력한다.  
+new에 ''만을 입력하면 replace() 메소드는 문자열1을 삭제하는 역할을 수행한다.  
+<br>
+삭제하는 방식을 선택한 이유는  
+dz=의 개수를 계산하고 그대로 두면, 이후 z=의 개수를 계산할 때 중복으로 인식될 것을 방지하기 위함이다.  
+또한 모든 특수 조합을 삭제하면 마지막에 남은 알파벳을 한 글자씩 개수를 측정하기 위해서였다.  
+<br>
+<br>
+* * *
+그런데 삭제 방법을 사용했더니 문제가 발생했다.  
+특수 조합을 삭제한 이후, 해당 특수 조합의 앞뒤 문자가 붙여져서 새로운 특수 조합이 만들어졌다.  
+<br>
+문제에서 제시된 예제 입력3 nljj에서 특수 조합은 lj만 존재하므로 정상적으로는 문자 3개로 인식해야 한다.  
+<br>
+그런데 위 코드를 적용하면  
+특수 조합 lj가 인식되어 count가 1 증가하고, lj가 삭제되어 nj가 남는다.  
+특수 조합 nj가 인식되어 count가 1 증가하고, nj가 삭제되어 남은 문자열이 없다.  
+결과적으로 nljj를 문자 2개로 인식한다.  
+<br>
+<br>
+* * *
+위 문제를 해결하기 위해서는  
+특수 조합을 삭제하는 것이 아니라, 다른 기호로 대체하는 방법을 사용해야 한다.  
+<br>
+<br>
+* * *
+**해결책**  
+```python
+croatia = ['c=', 'c-', 'dz=', 'd-', 'lj', 'nj', 's=', 'z=']
+words = input()
+
+for i in croatia:
+    words = words.replace(i,'*')
+
+print(len(words))
+```
+<br>
+<br>
+'시행착오' 코드를 수정해야 하는데 길이가 길고 반복되는 부분이 많아서 for문으로 변경했다.  
+<br>
+특수 조합을 리스트 croatia에 저장했다.  
+이때, 'dz='가 'z='보다 앞쪽에 위치해야 'dz='를 다른 문자로 변경하고 'z='를 검사한다.  
+문자열을 입력받아 words에 저장했다.  
+```python
+croatia = ['c=', 'c-', 'dz=', 'd-', 'lj', 'nj', 's=', 'z=']
+words = input()
+```
+<br>
+<br>
+* * *
+croatia의 각 요소를 for문의 i로 가져와서,   
+words에 i가 있으면 기호 \*로 변경한다.  
+즉, 각 특수 조합을 문자 1개(\* 1개)로 변경한다.  
+<br> 
+이로써 'dz='와 'z='를 중복 카운트하는 문제를 해결했고  
+전체 문자 개수를 계산할 때 문자열 길이를 계산하면 된다.  
+특수 조합을 삭제하는 방법이 아니라서 '시행착오' 코드에서 새롭게 발생한 문제가 생기지 않는다.  
+```python
+for i in croatia:
+    words = words.replace(i,'*')
+```
+replace() 메소드에 대한 설명은 '시행착오' 코드 설명에 작성했다.  
+<br>
+<br>
+* * *
+for문이 끝나고  
+words의 길이를 출력하면 풀이가 끝난다.  
+```python
+print(len(words))
+```
+<br> 
+<br> 
+### 예제 10단계, 1316번, "그룹 단어 체커", 구현, 문자열
+[백준 1316번 문제](https://www.acmicpc.net/problem/1316)  
+**해결책**  
+```python
+N = int(input())
+count = N
+
+for i in range(N):
+    abc = []
+    words=input()
+    for j in range(len(words)):
+        if words[j] not in abc:
+            abc.append(words[j])
+        else:
+            if words[j-1]==words[j]:
+                continue
+            else:
+                count -=1
+                break
+
+print(count)
+```
+<br>
+<br>
+단어 안에 모든 문자에 대해, 각 문자가 연속해서 나타나야 그룹 문자이다.  
+앞에 등장한 문자가 이웃하여 등장하는 것은 괜찮지만, 다른 문자가 등장한 이후 동떨어져서 등장하면 그룹 문자가 아니다.  
+리스트 abc를 빈 리스트로 초기화한다.  
+새로운 문자가 사용되면 리스트 abc에 저장하고,  
+새로운 문자가 아니라면(리스트 abc에 이미 있는 문자라면)  
+직전의 문자와 동일한지 검사하여,  
+동일하다면 넘어가고 동일하지 않다면 그룹 문자가 아니라고 판명하겠다.  
+<br>
+<br>
+* * *
+단어의 개수를 입력받아 N에 저장한다.  
+그룹 단어의 개수 count를 N으로 초기화한다.  
+검사하는 단어가 그룹 단어가 아닐 때마다 count에 1을 뺄 것이다.  
+```python
+N = int(input())
+count = N
+```
+<br>
+<br>
+* * *
+단어 N개를 검사해야 하므로  
+for문을 N번 시행한다.  
+리스트 abc를 빈 리스트로 초기화한다.  
+리스트 abc를 초기화하지 않는다면, 다음 단어를 검사할 때 abc에 이미 자료가 들어있어 영향을 준다.  
+단어를 입력받아 words에 저장한다.  
+```python
+for i in range(N):
+    abc = []
+    words=input()
+```
+<br>
+<br>
+* * *
+words의 길이만큼 for문을 시행한다.  
+words\[j]가 리스트 abc에 없다면(if, 새로운 문자 사용)  
+리스트 abc에 저장하고 다음으로 넘어간다(j 1추가)  
+<br>
+words\[j]가 리스트 abc에 있다면(else, 이미 사용했던 문자)  
+바로 직전 문자 words\[j-1]와 words\[j]가 동일한지 확인한다(if문).  
+동일하다면(if, 연속된 문자 사용 중), 그룹 문자에 해당하므로 다음 j로 넘어간다.  
+동일하지 않다면(else, 이전에 사용한 문자가 동떨어져서 사용됨) 그룹 문자가 아니므로  
+for문을 break로 끝내고 count에 1을 뺀다.  
+<br>
+단어가 그룹 단어에 해당하면 count 변화 없이, 다음 단어로 넘어간다.   
+```python
+    for j in range(len(words)):
+        if words[j] not in abc:
+            abc.append(words[j])
+        else:
+            if words[j-1]==words[j]:
+                continue
+            else:
+                count -=1
+                break
+```
+<br>
+<br>
+* * *
+모든 단어에 대해 그룹 단어 검사를 끝내면  
+그룹 단어 개수 count를 출력한다.  
+<br>
 <br>
 문제 조건을 충족했다.  
 <br> 
