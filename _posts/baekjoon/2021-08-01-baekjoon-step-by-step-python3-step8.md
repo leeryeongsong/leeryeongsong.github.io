@@ -1,6 +1,6 @@
 ---
 title:  "[8단계] 파이썬3으로 백준 단계별로 풀어보기- 기본 수학 1"
-excerpt: "8단계 1712번, 2292번"
+excerpt: "8단계 1712번, 2292번, 1193번, 2869"
 toc: true
 toc_sticky: true
 toc_label: "백준 단계별로 풀어보기 8단계"
@@ -103,6 +103,83 @@ print(move)
 <br> 
 <br> 
 * * *
+
+<br> 
+<br> 
+* * *
+
+<br>
+<br>
+### 예제 3단계, 1193번, "분수찾기", 수학, 구현  
+[백준 1193번 문제](https://www.acmicpc.net/problem/1193)  
+**해결책**  
+```python
+X = int(input())
+
+end_num = 1
+gap = 1
+count = 1
+
+while end_num<X:
+    count += 1
+    gap += 1
+    end_num += gap
+
+order = X - (end_num - gap) -1
+if count % 2 == 0:
+    print(f"{1+order}/{count-order}")
+else:
+    print(f"{count-order}/{1+order}")
+```
+<br> 
+<br> 
+
+
+<br> 
+<br> 
+* * *
+
+<br> 
+<br> 
+* * *
+
+<br>
+<br>
+### 예제 4단계, 2869번, "달팽이는 올라가고 싶다", 수학,  
+[백준 2869번 문제](https://www.acmicpc.net/problem/2869)  
+**시행착오(시간초과)**  
+```python
+# 값이 커지면 시간 오래 걸림
+A, B, V =map(int, input().split())
+R = 0
+day = 0
+
+while R < V:
+    day += 1
+    R += A
+    if R >= V:
+        break
+    R -= B
+
+print(day)
+```
+<br> 
+<br> 
+
+
+<br> 
+<br> 
+* * *
+**해결책**  
+```python
+import math
+
+A, B, V =map(int, input().split())
+
+print(math.ceil((V-A)/(A-B))+1)
+```
+<br> 
+<br> 
 
 <br> 
 <br> 
