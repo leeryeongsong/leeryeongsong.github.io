@@ -187,3 +187,49 @@ print(math.ceil((V-A)/(A-B))+1)
 
 <br>
 <br>
+### 예제 5단계, 10250번, "ACM호텔", 수학, 구현, 사칙연산  
+[백준 10250번 문제](https://www.acmicpc.net/problem/10250)  
+**해결책**  
+```python
+T = int(input())
+for i in range(T):
+    H, W, N = map(int, input().split())
+    YY = N % H
+    if YY == 0:
+        YY = H
+        XX = str(N //H)
+    else:
+        XX = str(N // H + 1)
+    XX = XX.rjust(2, "0")
+    print(f"{YY}{XX}")
+```
+<br> 
+<br> 
+
+
+<br> 
+<br> 
+* * *
+### 예제 6단계, 2775번, "부녀회장이 될테야", 수학,    
+[백준 10250번 문제](https://www.acmicpc.net/problem/10250)  
+**해결책**  
+```python
+T = int(input())
+for i in range(T):
+    H, W, N = map(int, input().split())
+    YY = N % H
+    if YY == 0:
+        YY = H
+        XX = str(N //H)
+    else:
+        XX = str(N // H + 1)
+    XX = XX.rjust(2, "0")
+    print(f"{YY}{XX}")
+```
+<br> 
+<br> 
+
+
+<br> 
+<br> 
+* * *
