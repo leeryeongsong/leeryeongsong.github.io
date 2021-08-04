@@ -1,6 +1,6 @@
 ---
 title:  "[8단계] 파이썬3으로 백준 단계별로 풀어보기- 기본 수학 1"
-excerpt: "8단계 1712번, 2292번, 1193번, 2869"
+excerpt: "8단계 1712번, 2292번, 1193번, 2869번, 10250번, 2775번, 2839번, 10757번"
 toc: true
 toc_sticky: true
 toc_label: "백준 단계별로 풀어보기 8단계"
@@ -225,6 +225,44 @@ for i in range(T):
         XX = str(N // H + 1)
     XX = XX.rjust(2, "0")
     print(f"{YY}{XX}")
+```
+<br> 
+<br> 
+
+
+<br> 
+<br> 
+* * *
+### 예제 7단계, 2839번, "설탕 배달", 수학, 다이나믹 프로그래밍, 그리디 알고리즘, 브루트포스 알고리즘   
+[백준 2839번 문제](https://www.acmicpc.net/problem/2839)  
+**해결책**  
+```python
+N = int(input())
+
+count = 0
+
+while N>=0:
+    if N % 5 == 0:
+        count += N // 5
+        print(count)
+        break
+    N -= 3
+    count += 1
+if N < 0:
+    print(-1)
+```
+<br> 
+<br> 
+
+
+<br> 
+<br> 
+* * *
+### 예제 8단계, 10757번, "큰 수 A+B", 수학, 구현, 사칙연산, 임의 정밀도/큰 수 연산   
+[백준 10757번 문제](https://www.acmicpc.net/problem/10757)  
+**해결책**  
+```python
+
 ```
 <br> 
 <br> 
