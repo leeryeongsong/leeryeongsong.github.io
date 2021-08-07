@@ -14,6 +14,9 @@ tags:
   - Python3
   - 사칙연산
   - 수학
+  - 정수론
+  - 소수_판정
+  - 에라토스테네스의_체 
 ---
 <br>
 백준의 **저작권** 안내에 따라   
@@ -275,6 +278,283 @@ N이 i보다 작거나 같아지면, 소인수분해가 끝난 것이고 while �
 <br> 
 * * *
 문제 조건을 충족했다.  
+<br> 
+<br> 
+* * *
+### 예제 4단계, 1929번, "소수 구하기", 수학, 정수론, 소수 판정, 에라토스테네스의 체  
+[백준 1929번 문제](https://www.acmicpc.net/problem/1929)  
+**시행착오**  
+```python
+# 시간 초과
+import math
+def is_prime_number(n):
+    array = [True for i in range(n+1)] 
+    for i in range(2, int(math.sqrt(n)) + 1): 
+        if array[i] == True: 
+            j = 2
+            while i * j <= n:
+                array[i * j] = False
+                j += 1
+    return [ i for i in range(2, n+1) if array[i] ]
+M, N = map(int, input().split())
+prime_num = [x for x in is_prime_number(N) if x not in is_prime_number(M-1)]
+for i in range(len(prime_num)):
+    print(prime_num[i])
+```
+<br> 
+<br>
+예제 1, 2단계 문제와 같이  
+N 이하의 소수를 리스트 자료형으로 반환하는 함수 is_prime_number()를 정의하고 이용했다.  
+해당 함수에 대한 내용은 아래 링크에 있다.  
+[에라토스테네스의 체 설명 블로그 글](https://velog.io/@koyo/python-is-prime-number)  
+<br> 
+<br> 
+* * *
+M과 N을 입력받아서 저장한다.  
+공백을 기준으로 나눠서 입력받고, int형으로 변환하여 저장하므로 아래와 같이 코드를 작성한다.  
+```python
+M, N = map(int, input().split())
+```
+<br> 
+<br> 
+* * *
+M 이상 N 이하의 소수를 한 줄에 하나씩, 증가하는 순서대로 소수를 출력해야 한다.  
+예제 2단계에서 M 이상 N 이하의 소수를 구하기 위해 리스트 컴프리헨션을 이용한 것과 동일한 방식을 사용했다.  
+```python
+prime_num = [x for x in is_prime_number(N) if x not in is_prime_number(M-1)]
+```
+N 이하의 소수를 리스트 자료형으로 반환하는 is_prime_number(N)에서 요소 x를 가져오는데,  
+M-1 이하의 소수를 리스트 자료형으로 반환하는 is_prime_number(M-1)에 포함되지 않은 x만 가져와서  
+prime_num에 저장한다.   
+prime_num에는 M 이상 N 이하의 소수가 리스트 형태로 저장되어 있다.  
+<br> 
+<br> 
+* * *
+구한 소수를 한 줄에 하나씩, 증가하는 순서대로 출력해야 한다.  
+이미 prime_num에는 증가하는 순서대로 소수가 저장되어 있으므로,  
+for문을 이용하여 한 줄에 하나씩 출력한다.  
+```python
+for i in range(len(prime_num)):
+    print(prime_num[i])
+```
+<br> 
+<br> 
+* * *
+시간 초과 결과가 나왔다.  
+아래처럼 코드를 수정했다.  
+<br> 
+<br> 
+* * *
+**해결책**  
+```python
+# 메모리 42488KB 시간 532ms 
+import math
+def is_prime_number(n):
+    array = [True for i in range(n+1)] 
+    for i in range(2, int(math.sqrt(n)) + 1): 
+        if array[i] == True: 
+            j = 2
+            while i * j <= n:
+                array[i * j] = False
+                j += 1
+    return [ i for i in range(2, n+1) if array[i] ]
+
+
+M, N = map(int, input().split())
+prime_num = is_prime_number(N)
+for i in prime_num:
+    if i>=M:
+        print(i)
+```
+<br> 
+<br>
+M과 N을 입력받아 저장하고, 그 아래 코드 부분을 수정했다.  
+<br> 
+<br> 
+* * *
+is_prime_number(N)를 prime_num에 저장한다.  
+prime_num에는 N 이하의 소수가 증가하는 순서대로 저장되어 있다.  
+```python
+prime_num = is_prime_number(N)
+```
+<br> 
+<br> 
+* * *
+M 이상 N 이하의 소수를 증가하는 순서대로 출력해야 한다.  
+for문으로, prime_num의 요소 i를 가져와서  
+i가 M 이상이면 i를 출력한다.  
+```python
+for i in prime_num:
+    if i>=M:
+        print(i)
+```
+<br> 
+<br> 
+* * *
+문제 조건을 충족했다.  
+```python
+# 메모리 42488KB 시간 532ms 
+```
+<br> 
+<br> 
+* * *
+### 예제 5단계, 4938번, "베르트랑 공준", 수학, 정수론, 소수 판정, 에라토스테네스의 체  
+[백준 4938번 문제](https://www.acmicpc.net/problem/4938)  
+**시행착오**  
+```python
+# 시간 초과
+import math
+def is_prime_number(n):
+    array = [True for i in range(n+1)] 
+    for i in range(2, int(math.sqrt(n)) + 1): 
+        if array[i] == True: 
+            j = 2
+            while i * j <= n:
+                array[i * j] = False
+                j += 1
+    return [ i for i in range(2, n+1) if array[i] ]
+n = 1
+while n:
+    n = int(input())
+    if n == 0:
+        break
+    prime_num_2n = is_prime_number(2*n)
+    prime_num_n = is_prime_number(n)
+    print(len(prime_num_2n)-len(prime_num_n))
+```
+<br> 
+<br>
+예제 1, 2, 4단계 문제와 같이  
+N 이하의 소수를 리스트 자료형으로 반환하는 함수 is_prime_number()를 정의하고 이용했다.  
+해당 함수에 대한 내용은 아래 링크에 있다.  
+[에라토스테네스의 체 설명 블로그 글](https://velog.io/@koyo/python-is-prime-number)   
+<br> 
+<br> 
+* * *
+입력받은 수를 n에 저장할 것이다.  
+n을 입력할 때마다 n보다 크고, 2n보다 작거나 같은 소수의 개수를 출력해야 한다.  
+n에 0을 입력하면 프로그램 실행을 끝내야 한다.  
+그러므로 n의 초기값을 1로 설정하고,  
+while n: 으로 n이 0이 아닐 때는 True로 취급하여 무한 루프로 동작시킨다.  
+(while true라고 입력해도 된다.)  
+<br> 
+숫자 n을 입력받아 정수형으로 변환하고 n에 저장한다.  
+<br> 
+if문으로 n에 입력받은 자료가 0과 같으면 break로 while문을 끝낸다.  
+```python
+n = 1
+while n:
+    n = int(input())
+    if n == 0:
+        break
+```
+while n:으로 코드를 작성해뒀는데 왜 if문을 썼냐면,  
+if문이 없다면  
+n에 0을 저장해도, 진행하던 while은 그대로 실행되어 n이 0일 때의 결과물 0이 출력된 다음,  
+while n: 조건을 확인하니 n이 0, False 조건이므로 프로그램 실행을 멈춘다.  
+이런 동작은 소스 코드에서 n값을 확인하는 while n:이 n을 입력받아 저장하는 n = int(input()) 보다 앞에 있기 때문이다.  
+<br> 
+문제에서 원하는 동작 방식은  
+0을 입력했을 때 출력 결과 없이 바로 프로그램 실행을 멈추는 것이다.  
+따라서 n을 입력받아 저장한 다음, if문으로 n을 확인하는 코드를 작성했다.  
+<br> 
+<br> 
+* * *
+문제는 n보다 크고, 2n보다 작거나 같은 소수의 개수를 출력해야 한다.  
+prime_num_2n에 is_prime_number(2\*n)를 저장하고,  
+prime_num_n에 is_prime_number(n)를 저장했다.  
+```python
+    prime_num_2n = is_prime_number(2*n)
+    prime_num_n = is_prime_number(n)
+```
+이로써 
+prime_num_2n에 2n 이하 소수가 리스트 자료형으로 저장되었고,  
+prime_num_n에 n 이하 소수가 리스트 자료형으로 저장되었다.  
+<br> 
+<br> 
+* * *
+prime_num_2n의 길이와 prime_num_n의 길이를 len() 함수로 구하고,  
+빼기 연산자로 이들의 차를 구하면  
+n보다 크고 2n보다 작거나 같은 소수의 개수를 구한 것이다.  
+```python
+print(len(prime_num_2n)-len(prime_num_n))
+```
+<br> 
+<br> 
+* * *
+실행하니 '시간 초과'가 나왔다.  
+아래에 같이 코드를 수정했다.  
+
+<br> 
+<br> 
+* * *
+**해결책**  
+```python
+# 메모리 34744KB 시간 4796 ms
+import math
+def is_prime_number_2n(n):
+    array = [True for i in range(2*n+1)] 
+    for i in range(2, int(math.sqrt(2*n)) + 1): 
+        if array[i] == True: 
+            j = 2
+            while i * j <= 2*n:
+                array[i * j] = False
+                j += 1
+    return [ i for i in range(n+1, 2*n+1) if array[i] ]
+
+n = 1
+while n:
+    n = int(input())
+    if n == 0:
+        break
+    print(len(is_prime_number_2n(n)))
+```
+<br> 
+<br> 
+* * *
+이번에는 is_prime_number() 함수 정의를 수정했다.  
+이름도 is_prime_number_2n()으로 바꾸고  
+n을 함수에 전달하면  
+n+1 이상 2\*n 이하의 소수를 리스트 형태로 반환하도록  
+함수 내부의 리스트 자료형과 range() 함수의 범위, while문의 조건을 수정한다.  
+<br> 
+```python
+def is_prime_number_2n(n):
+    array = [True for i in range(2*n+1)] 
+    for i in range(2, int(math.sqrt(2*n)) + 1): 
+        if array[i] == True: 
+            j = 2
+            while i * j <= 2*n:
+                array[i * j] = False
+                j += 1
+    return [ i for i in range(n+1, 2*n+1) if array[i] ]
+```
+<br> 
+<br> 
+* * *
+n을 1로 초기화하고 while문을 시작, if문으로 n을 확인하는 것까지는 이전 코드와 동일하다.  
+```python
+n = 1
+while n:
+    n = int(input())
+    if n == 0:
+```
+<br> 
+<br> 
+* * *
+다음 과정으로  
+이전 코드에서는 2n 이하의 소수와 2n 이하의 소수 개수를 각각 구하여 뺐지만,   
+이번 코드에서는 바로 is_prime_number_2n(n)의 길이를 출력하면 된다.  
+```python
+    print(len(is_prime_number_2n(n)))
+```
+<br> 
+<br> 
+* * *
+문제 조건을 충족했다.  
+```python
+# 메모리 34744KB 시간 4796 ms
+```
 <br> 
 <br> 
 * * *
