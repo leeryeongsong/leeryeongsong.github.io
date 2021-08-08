@@ -1,6 +1,6 @@
 ---
 title:  "[9단계] 파이썬3으로 백준 단계별로 풀어보기- 기본 수학 2"
-excerpt: "9단계 1978번, 2581번, 11653번"
+excerpt: "9단계 1978번, 2581번, 11653번, 1929번, 4948번, 9020번, 1085번"
 toc: true
 toc_sticky: true
 toc_label: "백준 단계별로 풀어보기 9단계"
@@ -69,15 +69,149 @@ print(count)
 ```
 <br> 
 <br>
- 
-
-
-[에라토스테네스의 체 설명 블로그 글](https://velog.io/@koyo/python-is-prime-number)
-
+숫자 N개가 주어지고, 이 중 소수가 몇 개인지 찾아서 출력해야 한다. 
 <br> 
 <br> 
 * * *
+알고리즘 분류를 보니, 에라토스테네스의 체가 있어서 검색했다.  
+<br> 
+n 이하의 소수를 리스트 자료형으로 반환하는 함수 is_prime_number()를 정의하고 이용했다.  
+해당 함수에 대한 내용은 아래 링크에 있다.  
+[에라토스테네스의 체 설명 블로그 글](https://velog.io/@koyo/python-is-prime-number)  
+```python
+import math
 
+def is_prime_number(n):
+    array = [True for i in range(n+1)] 
+    for i in range(2, int(math.sqrt(n)) + 1): 
+        if array[i] == True: 
+            j = 2
+            while i * j <= n:
+                array[i * j] = False
+                j += 1
+    return [ i for i in range(2, n+1) if array[i] ]
+```
+<br> 
+<br> 
+* * *
+n 이하의 소수를 반환하는 함수를 살펴보자.  
+```python
+import math
+
+def is_prime_number(n):
+```
+풀이 중간에 제곱근을 구하는 math.sqrt()을 사용하므로, math를 import한다.  
+def 키워드로 is_prime_number(n) 함수를 정의한다.  
+<br> 
+<br> 
+* * *
+True가 n+1개인 리스트 array를 선언한다.  
+```python
+    array = [True for i in range(n+1)] 
+```
+리스트 array\[j] = True이면 j가 소수라는 의미이므로  
+리스트 array가 True n+1개로 이루어져 있다면, 0부터 n까지 모든 수가 소수라고 간주하는 것이다.  
+<br> 
+<br> 
+* * *
+에라토스테네스의 체는  
+확인하지 않은 수 i 중 가장 작은 소수를 찾고,  
+가장 작은 소수의 배수에 해당하는 수는 소수가 아니므로 제거한다.  
+위 방법을 반복하는데, i를 n까지 확인하는 게 아니라 n의 제곱근까지 확인하면 된다.  
+```python
+    for i in range(2, int(math.sqrt(n)) + 1): 
+        if array[i] == True: 
+            j = 2
+            while i * j <= n:
+                array[i * j] = False
+                j += 1
+```
+왜 i를 n까지가 아니라 n의 제곱근까지 확인하면 되는지 살펴보자.  
+
+n이 121이면 n의 제곱근은 11이다.  
+11^2 = 121  
+121을 두 수의 곱으로 표현한다면,  
+11보다 큰 두 수의 곱으로 121을 만들어 낼 수 없다. (12와 13의 곱으로 121을 만들어 낼 수 없다.)  
+121과 그 이하의 숫자를 두 수의 곱 i \* j 으로 나타내려면, 두 수 i 와 j 중 적어도 하나(i라고 하자)는 11 이하이다.  
+따라서 i를 11까지 확인하면 된다.  
+
+수식으로 살펴보자.  
+숫자 n이 i와 j의 곱으로 나타내어질 때(소수가 아님)  
+i가 n의 제곱근보다 작다면 j는 n의 제곱근보다 크다는 것을 확인하자.    
+
+n = i \* j = (n^(1/2)) \* (n^(1/2))  
+
+i < n^(1/2) 이면  
+양변에 j(양수)를 곱했을 때  
+i \* j < (n^(1/2)) \* j  
+이때 좌변 i \* j = n = (n^(1/2)) \* (n^(1/2)) 이므로  
+i \* j = n = (n^(1/2)) \* (n^(1/2)) < (n^(1/2)) \* j  
+즉,  
+(n^(1/2)) \* (n^(1/2)) < (n^(1/2)) \* j  
+양변에 양수 (n^(1/2))를 나누면  
+(n^(1/2)) < j  
+
+따라서, i이 n의 제곱근보다 작다면 j는 n의 제곱근보다 크다.  
+에라토스테네스의 체에서 i를 2부터 n의 제곱근까지 확인하면 곱 i * j 중 작은 수를 충분히 확인하는 것이다.  
+<br> 
+<br> 
+* * *
+에라토스테네스의 체 과정이 끝나고  
+2부터 n까지의 i 중 array\[i]가 True인 i를 가져와서 리스트 형태로 반환하면 된다.  
+n 이하의 소수를 증가하는 순서대로, 리스트 형태로 반환한다.  
+```python
+    return [ i for i in range(2, n+1) if array[i] ]
+```
+<br> 
+<br> 
+* * *
+이제 is_prime_number(n) 함수 정의가 끝났다.  
+<br> 
+수의 개수를 입력받아 N에 저장한다.  
+N개의 수를 공백을 기준으로 입력받아 정수형으로 변환하고, 리스트 자료형으로 N_list에 저장한다.  
+```python
+N = int(input())
+N_list = list(map(int, input().split()))
+```
+<br> 
+<br> 
+* * *
+N 개의 수 중 최댓값(max(N_list))을 is_prime_number() 함수에 대입한다.  
+N 개의 수 중 최댓값 이하의 소수를 리스트 자료형으로 구하여 prime_num에 저장한다.  
+```python
+prime_num = is_prime_number(max(N_list))
+```
+<br> 
+<br> 
+* * *
+count 변수는 N 개의 수 중 소수의 개수를 저장할 변수이다.  
+count를 0으로 초기화한다.  
+```python
+count = 0
+```
+<br> 
+<br> 
+* * *
+for문으로 N_list의 각 요소를 i로 가져와서,  
+i가 소수인 prime_num에 존재한다면(if)  
+소수의 개수인 count에 1을 더한다.  
+```python
+for i in N_list:
+    if i in prime_num:
+        count += 1
+```
+<br> 
+<br> 
+* * *
+for문이 끝나고  
+N개의 숫자 중 소수의 개수인 count를 출력한다.  
+```python
+print(count)
+```
+<br> 
+<br> 
+* * *
+문제 조건을 충족했다.  
 <br> 
 <br> 
 * * *
@@ -307,6 +441,19 @@ for i in range(len(prime_num)):
 N 이하의 소수를 리스트 자료형으로 반환하는 함수 is_prime_number()를 정의하고 이용했다.  
 해당 함수에 대한 내용은 아래 링크에 있다.  
 [에라토스테네스의 체 설명 블로그 글](https://velog.io/@koyo/python-is-prime-number)  
+```python
+import math
+
+def is_prime_number(n):
+    array = [True for i in range(n+1)] 
+    for i in range(2, int(math.sqrt(n)) + 1): 
+        if array[i] == True: 
+            j = 2
+            while i * j <= n:
+                array[i * j] = False
+                j += 1
+    return [ i for i in range(2, n+1) if array[i] ]
+```
 <br> 
 <br> 
 * * *
@@ -428,6 +575,19 @@ while n:
 N 이하의 소수를 리스트 자료형으로 반환하는 함수 is_prime_number()를 정의하고 이용했다.  
 해당 함수에 대한 내용은 아래 링크에 있다.  
 [에라토스테네스의 체 설명 블로그 글](https://velog.io/@koyo/python-is-prime-number)   
+```python
+import math
+
+def is_prime_number(n):
+    array = [True for i in range(n+1)] 
+    for i in range(2, int(math.sqrt(n)) + 1): 
+        if array[i] == True: 
+            j = 2
+            while i * j <= n:
+                array[i * j] = False
+                j += 1
+    return [ i for i in range(2, n+1) if array[i] ]
+```
 <br> 
 <br> 
 * * *
@@ -555,6 +715,308 @@ while n:
 ```python
 # 메모리 34744KB 시간 4796 ms
 ```
+<br> 
+<br> 
+* * *
+### 예제 6단계, 9020번, "골드바흐의 추측", 수학, 정수론, 소수 판정, 에라토스테네스의 체  
+[백준 9020번 문제](https://www.acmicpc.net/problem/9020)  
+**시행착오**  
+```python
+# 시행착오 1
+# 시간 초과
+import math
+
+def is_prime_number(n):
+    array = [True for i in range(n+1)] 
+    for i in range(2, int(math.sqrt(n)) + 1): 
+        if array[i] == True: 
+            j = 2
+            while i * j <= n:
+                array[i * j] = False
+                j += 1
+    return [ i for i in range(2, n+1) if array[i] ]
+
+T = int(input())
+
+for i in range(T):
+    n = int(input())
+    prime_num = is_prime_number(n)
+    for j in range(-1, -len(prime_num)-1,-1):
+        if prime_num[j] <= n//2:
+            if n-prime_num[j] in prime_num:
+                print(prime_num[j], n-prime_num[j])
+                break
+
+
+# 시행착오 2. input() 대신 sys.stdin.readline() 사용
+# 시간 초과
+import math
+import sys
+
+def is_prime_number(n):
+    array = [True for i in range(n+1)] 
+    for i in range(2, int(math.sqrt(n)) + 1): 
+        if array[i] == True: 
+            j = 2
+            while i * j <= n:
+                array[i * j] = False
+                j += 1
+    return [ i for i in range(2, n+1) if array[i] ]
+
+T = int(sys.stdin.readline())
+
+for i in range(T):
+    n = int(sys.stdin.readline())
+    prime_num = is_prime_number(n)
+    for j in range(-1, -len(prime_num)-1,-1):
+        if prime_num[j] <= n//2:
+            if n-prime_num[j] in prime_num:
+                print(prime_num[j], n-prime_num[j])
+                break
+
+
+# 시행착오 3. math.sqrt() 대신 ** 연산자 사용해 봄. 여전히 시간 초과. 큰 영향이 없을 수 있음.
+# 시간 초과
+import sys
+
+def is_prime_number(n):
+    array = [True for i in range(n+1)] 
+    for i in range(2, int(n**0.5) + 1): 
+        if array[i] == True: 
+            j = 2
+            while i * j <= n:
+                array[i * j] = False
+                j += 1
+    return [ i for i in range(2, n+1) if array[i] ]
+
+T = int(sys.stdin.readline())
+
+for i in range(T):
+    n = int(sys.stdin.readline())
+    prime_num = is_prime_number(n)
+    for j in range(-1, -len(prime_num)-1,-1):
+        if prime_num[j] <= n//2:
+            if n-prime_num[j] in prime_num:
+                print(prime_num[j], n-prime_num[j])
+                break
+```
+<br> 
+<br>
+첫째 줄에 테스트 케이스의 개수 T가 주어지고,  
+각 테스트 케이스에 대해 주어진 짝수 n의 골드바흐 파티션을 출력해야 한다.  
+n의 골드바흐 파티션은 합이 n이 되는 두 소수의 조합을 의미한다.  
+n의 골드바흐 파티션이 여러 가지일 경우 두 소수의 차이가 가장 작은 것을 출력하며, 
+골드바흐 파티션을 출력할 때 작은 수 먼저 출력하고 공백으로 구분해야 한다.  
+<br> 
+<br> 
+* * *
+예제 1, 2, 4, 5단계 문제와 같이  
+N 이하의 소수를 리스트 자료형으로 반환하는 함수 is_prime_number()를 정의하고 이용했다.  
+```python
+import math
+
+def is_prime_number(n):
+    array = [True for i in range(n+1)] 
+    for i in range(2, int(math.sqrt(n)) + 1): 
+        if array[i] == True: 
+            j = 2
+            while i * j <= n:
+                array[i * j] = False
+                j += 1
+    return [ i for i in range(2, n+1) if array[i] ]
+```
+해당 함수에 대한 내용은 아래 링크에 있다.  
+[에라토스테네스의 체 설명 블로그 글](https://velog.io/@koyo/python-is-prime-number)   
+<br> 
+<br> 
+* * *
+테스트 케이스의 개수를 입력받아 T에 저장한다.   
+for-range() 문으로 for문을 T번 반복한다.  
+```python
+T = int(input())
+
+for i in range(T):
+```
+<br> 
+<br> 
+* * *
+짝수 n을 입력받아 n에 저장한다.  
+```python
+    n = int(input())
+```
+<br> 
+<br> 
+* * *
+prime_num에 is_prime_number(n)를 저장한다.  
+prime_num에 n 이하의 소수가 리스트 자료형으로 저장되었다.  
+```python
+    prime_num = is_prime_number(n)
+```
+<br> 
+<br> 
+* * *
+이제 골드바흐 파티션을 찾아야 한다.  
+<br>  
+문제 조건에 의해 여러 골드바흐 파티션 중 두 소수의 차이가 가장 작은 것을 찾아야 하는데,  
+두 소수의 차이가 작을수록, 두 소수는 n의 절반에 가깝다.
+<br> 
+prime_num에 소수는 증가하는 순서대로 저장되어 있다.  
+<br> 
+1) for문으로 두 소수 중 작은 수를 찾아낼 것이고,    
+n의 절반에서 작아지는 방향으로 확인하려면... prime_num에 인덱스를 -1부터 1씩 감소하며 접근하면 되고,  
+<br> 
+2) for문으로 두 소수 중 큰 수를 찾아낼 것이고,  
+n의 절반에서 증가하는 방향으로 확인하려면... prime_num에 인덱스를 0부터 1씩 증가하며 접근하면 된다.  
+<br> 
+이 코드는 1)의 방식으로 접근한다.  
+prime_num의 각 요소를 인덱스 -1부터 앞으로 한 칸씩 끝까지 확인할 것이다.  
+인덱스로 쓰일 j를 range(-1, -len(prime_num)-1, -1)에서 가져온다.  
+인덱스 -1은 연속적인 자료형의 가장 오른쪽 끝의 인덱스를 의미한다.  
+range()의 끝값을 -len(prime_num)-1로 설정하면, 연속적인 자료형의 왼쪽 끝까지 가져오게 된다.  
+끝값은 포함 안 되니, -len(prime_num)으로 설정하면 왼쪽 끝 자료를 안 가져온다! -1 필수.  
+<br> 
+prime_num은 소수가 증가하는 순서대로 저장되어 있기 때문에,  
+인덱스 -1부터 확인하면 소수가 감소하는 순서대로 확인하게 된다.  
+```python
+    for j in range(-1, -len(prime_num)-1,-1):  
+```
+<br> 
+if문으로 prime_num\[j]이 n//2보다 작을 때,  
+```python
+        if prime_num[j] <= n//2:    
+```
+<br> 
+n-prime_num\[j]도 prime_num에 해당한다면(소수에 해당한다면)  
+prime_num\[j]과 n-prime_num\[j]은 골드바흐 파티션이다.  
+<br> 
+prime_num\[j]은 n의 절반보다 작은 수이므로 n-prime_num\[j]보다 항상 작다.
+<br> 
+골드바흐 파티션을 작은 수 먼저 출력해야 하므로 
+prime_num\[j] n-prime_num\[j] 순서대로 출력한다.  
+<br> 
+구한 골드바흐 파티션이, 두 소수의 차이가 가장 작은 파티션이므로  
+다음 골드바흐 파티션을 출력하면 안 된다.  
+break로 for문 실행을 끝낸다.  
+```python
+            if n-prime_num[j] in prime_num:
+                print(prime_num[j], n-prime_num[j])
+                break
+```
+<br> 
+<br> 
+* * *
+실행하니 '시간 초과'가 나왔다.  
+<br> 
+백준 15552번([단계별로 풀어보기 3단계 중 예제 4번](https://leeryeongsong.github.io/baekjoon/baekjoon-step-by-step-python3-step3/#%EC%98%88%EC%A0%9C-4%EB%8B%A8%EA%B3%84-15552%EB%B2%88-%EB%B9%A0%EB%A5%B8-ab-%EC%88%98%ED%95%99-%EA%B5%AC%ED%98%84-%EC%82%AC%EC%B9%99%EC%97%B0%EC%82%B0))에서,  
+반복문으로 여러 줄 입력 받을 때 input()을 사용하면 시간 초과 나올 수 있다고 한 것이 생각났다.  
+input() 대신 sys.stdin.readline()으로 바꿔보기도 하고...(<- 바꿔도 '시간 초과')  
+math.sqrt()를 ** 연산자로 바꿔보기도 했다. (<- 바꿔도 '시간 초과', 큰 차이 없는 것인가?)  
+<br> 
+코드 풀이 과정을 바꿔야겠다고 생각하여, 아래와 같이 변경했다.  
+<br> 
+<br> 
+* * *
+**해결책**  
+```python
+# 메모리 29200KB, 시간 1856ms
+import sys
+
+array = [True] * 10001
+for i in range(2, 101):
+    if array[i] == True:
+        for j in range(i+i, 10001, i):
+            array[j] = False
+prime_num = [i for i in range(2, 10001) if array[i] == True]
+
+T = int(sys.stdin.readline())
+
+for i in range(T):
+    n = int(sys.stdin.readline())
+    half = n//2
+    for j in range(half, -1, -1):
+        if j in prime_num and n-j in prime_num:
+            print(j, n-j)
+            break
+```
+<br> 
+<br> 
+* * *
+이전 풀이는  
+n 이하의 소수를 구하는 함수를 정의하고,  
+각 테스트 케이스에서 n을 입력받으면  
+n 이하의 소수를 구하고 -> 모든 소수를 확인하여 -> 소수가 n//2 이하이면 -> n-소수가 소수인지 확인하고 -> n-소수가 소수가 맞다면 소수, n-소수 출력  
+<br> 
+변경한 풀이는  
+n은 4 이상 10000 이하이다.  
+10000 이하의 소수를 구한다.  
+(위에서 정의한 함수에 대입하면 된다.)  
+각 테스트 케이스에서 n을 입력받으면  
+n//2를 구하고 -> 정수 j를 n//2부터 0까지 -1씩 감소하며 확인하여 -> j가 소수에 속하고 n-j도 소수에 속하면 j, n-j 출력  
+<br> 
+<br> 
+* * *
+문제 조건을 충족했다.  
+```python
+# 메모리 29200KB, 시간 1856ms
+```
+
+<br> 
+<br> 
+* * *
+### 예제 7단계, 1085번, "직사각형에서 탈출", 수학, 기하학  
+[백준 1085번 문제](https://www.acmicpc.net/problem/1085)  
+**해결책**  
+```python
+x, y, w, h = map(int, input().split())
+
+a = w - x
+b = h - y
+c = x
+d = y
+print(min(a, b, c, d))
+```
+<br> 
+<br>
+좌표 공간에 각 변이 좌표축에 평행하는 직사각형이 있다.  
+직사각형의 왼쪽 아래 꼭짓점은 (0, 0), 오른쪽 위 꼭짓점은 (w, h)에 있다.  
+직사각형 내의 좌표 (x, y)가 주어지고,  
+(x, y)에서 직사각형의 경계선까지의 최단거리를 출력해야 한다.  
+<br> 
+<br> 
+* * *
+x, y, w, h는 정수이다. 
+첫째 줄에 x, y, w, h를 공백을 기준으로 입력받고 정수형으로 변환하여 저장한다.  
+```python
+x, y, w, h = map(int, input().split())
+```
+<br> 
+<br> 
+* * *
+점 (x, y)에서 직사각형의 경계선까지의 최단 거리는  
+경계선(x = 0, x = w, y = 0, y = h)이 좌표축과 평행하므로 |x좌표의 차이| 또는 |y좌표의 차이|로 나타낼 수 있다.  
+
+점에서 선까지의 최단 거리는  
+점에서 선으로 수선의 발을 내리고, 점에서 수선의 발까지의 거리를 계산해야 하는데,  
+선이 좌표축과 평행하니 점에서 수선의 발까지의 선분도 다른 좌표축과 평행하다.  
+
+점 (x, y)에서 4개의 경계선까지의 거리를 아래와 같이 모두 구한다.  
+```python
+a = w - x
+b = h - y
+c = x
+d = y
+```
+<br> 
+<br> 
+* * *
+4개의 거리 중 가장 작은 값을 출력하면 문제에서 요구하는 최단 거리이다.  
+```python
+print(min(a, b, c, d))
+```
+<br> 
+<br> 
+* * *
+문제 조건을 충족했다.  
 <br> 
 <br> 
 * * *
