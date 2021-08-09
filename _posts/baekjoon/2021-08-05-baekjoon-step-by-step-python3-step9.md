@@ -1,6 +1,6 @@
 ---
 title:  "[9단계] 파이썬3으로 백준 단계별로 풀어보기- 기본 수학 2"
-excerpt: "9단계 1978번, 2581번, 11653번, 1929번, 4948번, 9020번, 1085번"
+excerpt: "9단계 1978번, 2581번, 11653번, 1929번, 4948번, 9020번, 1085번, 3009번, 4153번"
 toc: true
 toc_sticky: true
 toc_label: "백준 단계별로 풀어보기 9단계"
@@ -17,6 +17,8 @@ tags:
   - 정수론
   - 소수_판정
   - 에라토스테네스의_체 
+  - 기하학
+  - 구현
 ---
 <br>
 백준의 **저작권** 안내에 따라   
@@ -1012,6 +1014,250 @@ d = y
 4개의 거리 중 가장 작은 값을 출력하면 문제에서 요구하는 최단 거리이다.  
 ```python
 print(min(a, b, c, d))
+```
+<br> 
+<br> 
+* * *
+문제 조건을 충족했다.  
+<br> 
+<br> 
+* * *
+### 예제 8단계, 3009번, "네 번째 점", 구현, 기하학  
+[백준 3009번 문제](https://www.acmicpc.net/problem/3009)  
+**해결책**  
+```python
+import sys
+
+x = [0, 0, 0]
+y = [0, 0, 0]
+for i in range(3):
+    x[i], y[i] = map(int, sys.stdin.readline().split())
+
+for j in x:
+    if x.count(j) == 1:
+        a = j
+for k in y:
+    if y.count(k) == 1:
+        b = k
+
+print(a, b)
+```
+<br> 
+<br>
+점 3개가 주어졌을 때, 축에 평행한 직사각형을 만드는 데 필요한 마지막 점의 좌표를 찾아야 한다.  
+<br>
+직사각형의 변이 축에 평행하지 않았다면.. 약간 복잡한 문제이지만,
+이 문제는 직사각형이 축에 평행하므로 간단한 문제이다.  
+<br> 
+<br> 
+* * *
+A--------B  
+|        |  
+|        |  
+|        |  
+D--------C  
+<br>
+위와 같이 직사각형의 변이 축과 평행하면...  
+점 A와 점 B는 y 좌표가 같고,
+점 D와 점 C는 y 좌표가 같다.
+또한  
+점 A와 점 D는 x 좌표가 같고  
+점 B와 점 C는 x 좌표가 같다.  
+<br>
+이를 좌표로 표시하면 다음과 같다.  
+A(x1, y2) B(x2, y2)
+D(x1, y1) C(x2, y1)
+<br>
+각 점의 좌표를 x 좌표끼리, y 좌표끼리 모아보면  
+x 좌표에는 x1, x1, x2, x2
+y 좌표에는 y1, y1, y2, y2
+<br>
+x 좌표, y 좌표 각각 2개의 좌표가 2번씩 나타나는 규칙성이 있다.  
+<br> 
+<br> 
+* * *
+만약 점이 3개만 주어진다면,  
+마지막 점으로 위의 규칙성을 만족할 수 있어야 한다.  
+즉,
+x 좌표끼리, y 좌표끼리 모아둔 리스트를 확인했을 때,
+1개만 있는 좌표가 마지막 점의 좌표가 된다.  
+<br> 
+<br> 
+* * *
+코드로 확인해보자.
+<br>
+입력받을 때 sys를 사용하므로 sys를 import 한다.  
+x와 y의 초기값을 \[0, 0, 0]으로 초기화한다.  
+x와 y는 3개의 점의 x 좌표, y 좌표를 저장할 변수이다.  
+```python
+import sys
+
+x = [0, 0, 0]
+y = [0, 0, 0]
+```
+<br> 
+<br> 
+* * *
+3개의 점의 좌표를 입력받는다.  
+for-range() 함수로 3번 반복한다.  
+x와 y 각각 x 좌표와 y 좌표를 공백으로 구분하여 저장한다.  
+```python
+for i in range(3):
+    x[i], y[i] = map(int, sys.stdin.readline().split())
+```
+<br> 
+<br> 
+* * *
+x의 요소를 for문의 j로 가져와서 확인한다.  
+j가 x에 존재하는 개수를 count() 메소드로 확인했을 때, 1개라면(if문) a에 j를 저장한다.  
+a는 네 번째 점의 x 좌표이다.  
+<br> 
+마찬가지로
+y의 요소를 for문의 k로 가져와서 확인한다.
+k가 y에 존재하는 개수를 count() 메소드로 확인했을 때, 1개라면(if문) b에 k를 저장한다.
+b는 네 번째 점의 y 좌표이다.
+```python
+for j in x:
+    if x.count(j) == 1:
+        a = j
+for k in y:
+    if y.count(k) == 1:
+        b = k
+```
+<br> 
+<br> 
+* * *
+네 번째 점의 x 좌표, y 좌표를 순서대로 출력한다.  
+a, b를 순서대로 출력하면 된다.  
+```python
+print(a, b)
+```
+<br> 
+<br> 
+* * *
+문제 조건을 충족했다.  
+<br> 
+<br> 
+* * *
+### 예제 9단계, 4153번, "직각삼각형", 수학, 기하학  
+[백준 4153번 문제](https://www.acmicpc.net/problem/4153)  
+**해결책**  
+```python
+import sys
+
+while True:
+    a, b, c = map(int, sys.stdin.readline().split())
+    if a == 0 and b == 0 and c == 0:
+        break
+    if a == max(a, b, c):
+        if a*a == b*b + c*c:
+            print('right')
+            continue
+        
+    elif b == max(a, b, c):
+        if  b*b == a*a + c*c:
+            print('right')
+            continue
+    elif c == max(a, b, c):
+        if  c*c == a*a + b*b:
+            print('right')
+            continue    
+    print('wrong')    
+```
+<br> 
+<br>
+세 변의 길이가 주어졌을 때,  
+직각삼각형이라면 "right" 아니라면 "wrong"을 출력한다.  
+입력이 여러 개의 테스트 케이스로 주어지며, 입력마다 위와 같이 출력해야 한다.
+0 0 0이 입력되면 실행을 멈춰야 한다.
+<br> 
+직각삼각형을 확인하려면  
+가장 긴 변을 찾아내고,
+가장 긴 변의 길이의 제곱 = 나머지 변의 길이의 제곱의 합
+이어야 한다.  
+<br> 
+<br> 
+* * *
+0 0 0이 입력될 때까지 반복해서 입력을 받아야 하므로, 
+입력에 sys.sydin.readline()을 사용할 것이다.  
+sys를 import 해야 한다. 
+```python
+import sys
+```
+<br> 
+<br> 
+* * *
+반복 횟수를 모르는 상태에서 반복해야 하므로  
+while문을 사용한다.  
+while True:로 작성하면 무한 반복한다.  
+```python
+while True:
+```
+<br> 
+<br> 
+* * *
+세 변의 길이를 입력받아 각각 a, b, c에 저장한다.  
+입력받을 때는 sys.stdin.readline().split() 함수를 이용한다.  
+a, b, c를 확인하여 모두 0이면(if문) while문 실행을 break로 종료한다.
+```python
+    a, b, c = map(int, sys.stdin.readline().split())
+    if a == 0 and b == 0 and c == 0:
+        break
+```
+<br> 
+<br> 
+* * *
+a에 저장된 값이 가장 긴 변의 길이(max(a, b, c))와 동일하다면(if문),
+a\*a == b\*b + c\*c인지 확인한다(if문).
+동일하다면, 직각삼각형이므로 'right'를 출력하고 continue로 while문의 처음으로 돌아간다.  
+```python
+    if a == max(a, b, c):
+        if a*a == b*b + c*c:
+            print('right')
+            continue
+```
+a에 저장된 값이 가장 긴 변의 길이와 동일할 때,  
+b에 저장된 값도 가장 긴 변의 길이와 동일할 수 있다.  
+그렇더라도 a\*a == b\*b + c\*c인지 확인할 때 충분히 직각삼각형인가 검사할 수 있다.  
+<br> 
+<br> 
+* * *
+a에 저장된 값이 가장 긴 변의 길이(max(a, b, c))와 동일하지 않고(elif문),
+b에 저장된 값이 가장 긴 변의 길이(max(a, b, c))와 동일할 때(elif문),
+b\*b == a\*a + c\*c인지 확인한다(if문).
+동일하다면, 직각삼각형이므로 'right'를 출력하고 continue로 while문의 처음으로 돌아간다.  
+```python
+    elif b == max(a, b, c):
+        if  b*b == a*a + c*c:
+            print('right')
+            continue
+```
+b에 저장된 값이 가장 긴 변의 길이와 동일할 때,  
+c에 저장된 값도 가장 긴 변의 길이와 동일할 수 있다.  
+그렇더라도 b\*b == a\*a + c\*c인지 확인할 때 충분히 직각삼각형인가 검사할 수 있다.  
+<br> 
+<br> 
+* * *
+a에 저장된 값이 가장 긴 변의 길이(max(a, b, c))와 동일하지 않고(elif문),
+b에 저장된 값이 가장 긴 변의 길이(max(a, b, c))와 동일하지 않고(elif문),
+c에 저장된 값이 가장 긴 변의 길이(max(a, b, c))와 동일할 때(elif문)!!!!,
+c\*c == a\*a + b\*b인지 확인한다(if문).
+동일하다면, 직각삼각형이므로 'right'를 출력하고 continue로 while문의 처음으로 돌아간다.  
+```python
+    elif c == max(a, b, c):
+        if  c*c == a*a + b*b:
+            print('right')
+            continue    
+```
+<br> 
+<br> 
+* * *
+위의 과정에서 조건을 충족하여 'right'를 출력하지 못했다면...
+그 외는 모두 직각삼각형이 아니므로 'wrong'을 출력한다.  
+이미 'right'를 출력한 테스트 케이스는 'right' 출력 직후 continue로 while문의 처음으로 돌아갔기에,  
+'wrong' 출력 코드까지 도달하지 않는다.  
+```python
+    print('wrong')    
 ```
 <br> 
 <br> 
