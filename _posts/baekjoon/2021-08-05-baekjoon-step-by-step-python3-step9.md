@@ -1,6 +1,6 @@
 ---
 title:  "[9단계] 파이썬3으로 백준 단계별로 풀어보기- 기본 수학 2"
-excerpt: "9단계 1978번, 2581번, 11653번, 1929번, 4948번, 9020번, 1085번, 3009번, 4153번"
+excerpt: "9단계 1978번, 2581번, 11653번, 1929번, 4948번, 9020번, 1085번, 3009번, 4153번, 3053번, 1002번"
 toc: true
 toc_sticky: true
 toc_label: "백준 단계별로 풀어보기 9단계"
@@ -29,7 +29,7 @@ tags:
 **사용 언어: Python 3**  
 **외부 에디터: Visual Studio Code**  
 <br>
-9단계 작성 기간 : 2021년 8월 5일 ~ 2021년 8월 
+9단계 작성 기간 : 2021년 8월 5일 ~ 2021년 8월 10
 <br>
 <br>
 # 9단계, 기본 수학 2
@@ -1052,9 +1052,9 @@ print(a, b)
 <br> 
 * * *
 A--------B  
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  
 D--------C  
 <br>
 위와 같이 직사각형의 변이 축과 평행하면...   
@@ -1259,6 +1259,263 @@ c\*c == a\*a + b\*b인지 확인한다(if문).
 ```python
     print('wrong')    
 ```
+<br> 
+<br> 
+* * *
+문제 조건을 충족했다.  
+<br> 
+<br> 
+* * *
+### 예제 10단계, 3053번, "택시 기하학", 수학, 기하학  
+[백준 3053번 문제](https://www.acmicpc.net/problem/3053)  
+**해결책**  
+```python
+import math
+
+R = int(input())
+
+print(f"{math.pi*R*R:.6f}")
+print(f"{2*R*R:.6f}")
+```
+<br> 
+<br>
+반지름 R이 주어지면  
+첫째 줄에 유클리드 기하학에서 반지름 R인 원의 넓이,  
+둘째 줄에 택시 기하학에서 반지름 R인 원의 넓이를 출력해야 한다.  
+예제 출력을 확인하면 소수점 6번째 자리까지 출력해야 한다.  
+<br> 
+<br> 
+* * *
+택시 기하학에서 원의 정의는 유클리드 기하학에서 원의 정의와 같다고 한다.  
+>원: 평면상의 어떤 점에서 거리가 일정한 점들의 집합  
+
+택시 기하학과 유클리드 기하학은 **거리**의 정의가 다르다.  
+<br> 
+택시 기하학에서 두 점 T1(x1, y1), T2(x2, y2) 사이의 거리는 다음과 같다.  
+거리 = \|x1-x2\| + \|y1-y2\|  
+<br>
+유클리드 기하학에서 두 점 T1(x1, y1), T2(x2, y2) 사이의 거리는 다음과 같다.  
+거리 = ((x1-x2)^2 + (y1-y2)^2)^(1/2)  
+<br>
+거리의 정의가 다르므로 원의 모양이 다를 것이다.  
+문제 풀이를 시작하자.  
+<br> 
+<br> 
+* * *
+원의 반지름을 구할 때 파이를 사용하므로 math를 import 한다.  
+반지름을 입력받아 R에 저장한다.  
+```python
+import math
+
+R = int(input())
+```
+<br> 
+<br> 
+* * *
+먼저 유클리드 기하학에서 반지름이 R인 원의 넓이를 구하자.  
+<br>
+유클리드 기하학에서 원은 평면상의 어떤 점에서 거리가 일정한 점들의 집합이다.  
+<br>
+유클리드 기하학의 거리의 정의를 살펴보고,  
+원점에서 거리가 일정한 점들의 집합의 함수를 살펴보자.  
+<br>
+유클리드 기하학의 두 점 T1(x1, y1), T2(x2, y2) 사이의 거리  
+거리 R = ((x1-x2)^2 + (y1-y2)^2)^(1/2)  
+<br> 
+거리가 상수 R로 일정하니 R을 대입,  
+x1과 y2에 원점 (0,0)을 대입,  
+x2와 y2에 x와 y를 대입하면  
+<br> 
+x^2 + y^2 = R^2  
+<br> 
+초중고등학교에서 배우던 원의 방정식이 나온다.  
+이러한 원의 넓이는 (원주율 파이)\*(반지름)^2이다.  
+파이썬에서 원주율 파이는 math.pi이다.  
+소수점 6번째 자리까지 출력해야 하므로  
+f-string 문자열 포매팅 방법을 이용하고 큰따옴표 안에 {변수:.6f}를 입력한다.  
+```python
+print(f"{math.pi*R*R:.6f}")
+```
+<br> 
+<br> 
+* * *
+택시 기하학에서 반지름이 R인 원의 넓이를 구하자.  
+택시 기하학에서 원의 정의는 유클리드 기하학과 같이, 평면상의 어떤 점에서 거리가 일정한 점들의 집합이다.  
+<br>
+마찬가지로  
+택시 기하학의 거리의 정의를 살펴보고,  
+원점에서 거리가 일정한 점들의 집합의 함수를 살펴보자.  
+<br>
+택시 기하학의 두 점 T1(x1, y1), T2(x2, y2) 사이의 거리  
+거리 = \|x1-x2\| + \|y1-y2\|  
+<br>
+거리가 상수 R로 일정하니 R을 대입,  
+x1과 y2에 원점 (0,0)을 대입,  
+x2와 y2에 x와 y를 대입하면  
+<br>
+\|x\| + \|y\| =  R  
+<br>
+택시 기하학에서 원은  
+유클리드 기하학에서 각 변이 축과 45도 각도를 이루고, 대각선의 길이가 2R인 정사각형의 형태를 보인다.  
+이 정사각형은  
+(R, 0), (0, R), (-R, 0), (0, -R)이 네 꼭짓점이다.  
+<br>
+이 정사각형의 한 변의 길이는 R\*(2^(1/2))이고,  
+넓이는 2\*R^2이다.  
+<br>
+택시 기하학의 원의 넓이도 소수점 6번째 자리까지 나타내야 하므로   
+아래와 같이 f-string 문자열 포매팅과 {변수:.6f}를 사용한다.  
+<br>
+```python
+print(f"{2*R*R:.6f}")
+```
+<br> 
+<br> 
+* * *
+문제 조건을 충족했다.  
+<br> 
+<br> 
+* * *
+### 예제 11단계, 1002번, "터렛", 수학, 기하학  
+[백준 1002번 문제](https://www.acmicpc.net/problem/1002)  
+**해결책**  
+```python
+# 메모리 31312KB 시간 76ms
+import sys
+import math
+
+T = int(sys.stdin.readline())
+
+for i in range(T):
+    x1, y1, r1, x2, y2, r2 = map(int, sys.stdin.readline().split())
+    if x1 == x2 and y1 == y2:
+        if r1 == r2:
+            print(-1)
+        else:
+            print(0)
+    else:
+        xy = math.sqrt((x2-x1)**2 + (y2-y1)**2)
+        rr = r1 + r2 
+        if xy == rr or xy == (r2 - r1) or xy == (r1 - r2):
+            print(1)       
+        elif xy < (r2 - r1) or xy < (r1 - r2):
+            print(0)
+        elif xy > rr:
+            print(0)
+        else:
+            print(2)
+```
+<br> 
+<br>
+첫째 줄에 테스트 케이스의 개수가 주어지고,  
+테스트 케이스마다 두 원의 x, y 좌표와 반지름이 주어지면  
+두 원이 몇 개의 점에서 만나는지 출력해야 한다.  
+무한대의 점에서 만난다면 -1을 출력해야 한다.  
+<br> 
+<br> 
+* * *
+반복문에서 입력받아야 하므로 sys.stdin.readline()이 필요해, sys를 import한다.  
+거리를 계산할 때 루트, math.sqrt()가 필요하므로 math를 import한다.  
+(루트 대신 \*\*(1/2) 사용해도 된다.)  
+```python
+import sys
+import math
+```
+<br> 
+<br> 
+* * *
+테스트 케이스의 개수를 입력받아 T에 저장한다.  
+for-range() 함수로 반복문을 T번 반복한다.  
+x1, y1, r1, x2, y2, r2를 공백을 기준으로 입력받아 정수형으로 변환하고 저장한다.  
+```python
+T = int(sys.stdin.readline())
+
+for i in range(T):
+    x1, y1, r1, x2, y2, r2 = map(int, sys.stdin.readline().split())
+```
+<br> 
+<br> 
+* * *
+두 원의 중심이 동일할 때(if문, x1 == x2 and y1 == y2)  
+두 반지름의 길이가 같다면(if문, r1 == r2)  
+두 원이 일치하므로 무한대의 점에서 만나, -1을 출력한다.   
+<br> 
+두 반지름의 길이가 같지 않다면(else)  
+동심원 상태로, 접점이 없으므로 0을 출력한다.  
+
+```python
+    if x1 == x2 and y1 == y2:
+        if r1 == r2:
+            print(-1)
+        else:
+            print(0)
+```
+<br> 
+<br> 
+* * *
+두 원의 중심이 동일하지 않을 때(else)  
+<br> 
+두 점 사이의 거리 xy를 구한다.  
+두 반지름의 합 rr를 구한다.   
+<br> 
+두 원이 외접하거나 내접할 때(if)  
+외접 : xy == rr  
+내접 : == (r2 - r1) or xy == (r1 - r2)  
+한 점에서 만나므로 1을 출력한다.   
+<br> 
+두 원이 외접하지 않고, 내접하지 않고(elif)  
+한 원이 다른 원의 내부에 있을 때(elif)  
+한 원이 다른 원 내부 : xy < (r2 - r1) or xy < (r1 - r2)  
+접점이 없으므로 0을 출력한다.   
+<br> 
+위의 조건에 모두 False이고 한 원이 다른 원의 외부에 있을 때(elif)  
+한 원이 다른 원의 외부에 존재 : xy > rr  
+접점이 없으므로 0을 출력한다.  
+<br> 
+위의 조건에 모두 False일 때(else)  
+남은 케이스는 두 원이 두 점에서 만날 때이다.  
+두 원이 두 점에서 만나므로 2를 출력한다.  
+<br> 
+두 원이 두 점에서 만날 때를 수식으로 표현한다면,  
+\|r1-r2\| < xy < r1 + r2  
+에 해당한다.  
+<br> 
+```python
+    else:
+        xy = math.sqrt((x2-x1)**2 + (y2-y1)**2)
+        rr = r1 + r2 
+        if xy == rr or xy == (r2 - r1) or xy == (r1 - r2):
+            print(1)       
+        elif xy < (r2 - r1) or xy < (r1 - r2):
+            print(0)
+        elif xy > rr:
+            print(0)
+        else:
+            print(2)
+```
+0을 출력하는 것은 elif 2개와 앞서 두 원의 중심이 같을 때 else 1개에 해당하고  
+2를 출력할 때의 조건이 명확하므로(\|r1-r2\| < xy < r1 + r2)  
+<br> 
+지금처럼  
+if (중심 같을 때)  
+&nbsp;&nbsp;&nbsp;&nbsp;if (두 원 일치. -1)  
+&nbsp;&nbsp;&nbsp;&nbsp;else (동심원. 0)  
+else (중심 같지 않을 때)  
+&nbsp;&nbsp;&nbsp;&nbsp;if (외접 또는 내접. 1)  
+&nbsp;&nbsp;&nbsp;&nbsp;elif (한 원이 다른 원 내부에 존재. 0)  
+&nbsp;&nbsp;&nbsp;&nbsp;elif (한 원이 다른 원 외부에 존재. 0)  
+&nbsp;&nbsp;&nbsp;&nbsp;else (두 원이 두 점에서 만남. 2)  
+<br> 
+이렇게 구성하는 것이 아니라  
+<br> 
+if (중심 같고 두 원 일치. -1)  
+elif (외접 또는 내접. 1)  
+elif (두 원이 두 점에서 만남. 2)  
+else (나머지. 0)  
+<br> 
+위와 같이 구성하는 편이 코드가 더 간단하다.  
+조건이 명확하고 한 케이스로 나타낼 수 있는 것을 elif로 두고,  
+조건이 여러 개인데 결과가 같은 것을 else로 두는 편이 묶어서 처리할 수 있다.  
 <br> 
 <br> 
 * * *
